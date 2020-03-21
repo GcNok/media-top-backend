@@ -1,0 +1,14 @@
+database:
+  name: itemcloud
+  host: 127.0.0.1
+  port: 3306 # default port for database
+  user: "smashop"
+  password: "smashop"
+  maxidleconnections: 10
+  maxopenconnections: 20
+  logmode: true
+server:
+  endpoint: "http://localhost"
+  host: localhost
+  port: 5000
+ 
