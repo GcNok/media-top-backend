@@ -1,14 +1,15 @@
 package registry
 
 import (
-	dbRepo "github.com/SmartShopping/special-management-backend/domain/repository/database"
-	"github.com/SmartShopping/special-management-backend/infrastructure/database"
 	"github.com/jinzhu/gorm"
+	dbRepo "github.com/shiji-naoki/media-top-appli-back/domain/repository/database"
+	"github.com/shiji-naoki/media-top-appli-back/infrastructure/database"
 )
 
 type (
 	Repository interface {
 		LoginRepository() dbRepo.LoginRepository
+		SpecialRepository() dbRepo.SpecialRepository
 	}
 
 	repositoryImpl struct {
@@ -22,4 +23,8 @@ func NewRepository() Repository {
 
 func (r *repositoryImpl) LoginRepository() dbRepo.LoginRepository {
 	return database.NewLoginRepository(r.dbConn)
+}
+
+func (r *repositoryImpl) SpecialRepository() dbRepo.SpecialRepository {
+	return database.NewSpecialRepository(r.dbConn)
 }

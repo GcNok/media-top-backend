@@ -1,10 +1,10 @@
 package database
 
 import (
-	dbEntity "github.com/SmartShopping/special-management-backend/domain/entity/database"
-	dbRepo "github.com/SmartShopping/special-management-backend/domain/repository/database"
 	"github.com/davecgh/go-spew/spew"
 	"github.com/jinzhu/gorm"
+	dbEntity "github.com/shiji-naoki/media-top-appli-back/domain/entity/database"
+	dbRepo "github.com/shiji-naoki/media-top-appli-back/domain/repository/database"
 )
 
 type loginRepository struct {

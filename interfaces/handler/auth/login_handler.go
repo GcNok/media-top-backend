@@ -1,10 +1,10 @@
 package auth
 
 import (
-	
-	"github.com/SmartShopping/special-management-backend/registry"
-	"github.com/SmartShopping/special-management-backend/application/usecase/auth"
 	"net/http"
+
+	"github.com/shiji-naoki/media-top-appli-back/application/usecase/auth"
+	"github.com/shiji-naoki/media-top-appli-back/registry"
 
 	"github.com/gin-gonic/gin"
 )

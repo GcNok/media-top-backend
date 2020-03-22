@@ -5,7 +5,7 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 
-	dbRepo "github.com/SmartShopping/special-management-backend/domain/repository/database"
+	dbRepo "github.com/shiji-naoki/media-top-appli-back/domain/repository/database"
 )
 
 type (
