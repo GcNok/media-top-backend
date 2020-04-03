@@ -1,4 +1,8 @@
-export default {
+import { Configuration } from '@nuxt/types'
+
+const envPath = `config/.env.${process.env.ENV || 'local'}`
+require('dotenv').config({ path: envPath })
+const nuxtConfig: Configuration = {
   mode: 'universal',
   /*
    ** Headers of the page
@@ -15,6 +19,9 @@ export default {
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  },
+  dotenv: {
+    filename: envPath
   },
   /*
    ** Customize the progress-bar color
@@ -35,8 +42,7 @@ export default {
     '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
-    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    'nuxt-typed-vuex'
   ],
   /*
    ** Nuxt.js modules
@@ -45,20 +51,19 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources'
   ],
+  styleResources: {
+    scss: ['~/assets/scss/style.scss', '~/assets/scss/function.scss']
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
-  /*
-   ** Build configuration
-   */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {}
+    transpile: [/typed-vuex/]
   }
 }
+export default nuxtConfig

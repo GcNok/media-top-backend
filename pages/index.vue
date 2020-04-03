@@ -31,6 +31,10 @@ import Logo from '~/components/Logo.vue'
 export default Vue.extend({
   components: {
     Logo
+  },
+  mounted() {
+    console.log(this.$accessor.meta.title)
+    // this.$accessor.meta.getMetaInfo()
   }
 })
 </script>

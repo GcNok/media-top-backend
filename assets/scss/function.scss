@@ -1,0 +1,31 @@
+$sp: 'sp';
+$tablet: 'tablet';
+$pc: 'pc';
+$breakpoints: (
+  $sp: 'screen and (max-width: 480px)',
+  $tablet: 'screen and (min-width: 768px)',
+  $pc: 'screen and (min-width: 1024px)',
+) !default;
+
+/* メディアクエリでのスタイル切り替え */
+@mixin media-query($breakpoint: $sp) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+/* レスポンシブに対応する幅の計算 */
+@function responsive-width($target-width-px){
+  $base-width: 375; /* iPhone6,7,8の幅 */
+  $vw-ratio: $base-width / 100;
+  @return $target-width-px / $vw-ratio * 1vw;
+}
+
+/* レスポンシブに対応する高さの計算 */
+@function responsive-height($target-height-px){
+  $base-height: 667; /* iPhone6,7,8の高さ */
+  $vh-ratio: $base-height / 100;
+  @return $target-height-px / $vh-ratio * 1vh;
+}
+
+
