@@ -14,5 +14,6 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',
     '<rootDir>/pages/**/*.vue'
-  ]
+  ],
+  testRegex: 'test/.*(test|spec)\\.(jsx?|tsx?)$'
 }

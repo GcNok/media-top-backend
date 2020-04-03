@@ -28,6 +28,10 @@
       "@nuxt/types"
     ]
   },
+  "include": [
+    "types/**/*",
+    "store/**/*",
+  ],
   "exclude": [
     "node_modules",
     ".nuxt",
