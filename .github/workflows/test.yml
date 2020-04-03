@@ -1,0 +1,27 @@
+name: Execute Jest And Cypress
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize]
+
+jobs:
+  run_lint_and_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["12.4.0"]
+    timeout-minutes: 300
+    steps:
+      - name: checkout pushed commit
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: run lint and test
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test
+
