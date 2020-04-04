@@ -45,10 +45,10 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .new-articles-wrapper {
-  margin-bottom: 20px;
+  margin-bottom: responsive-height(20);
   .article-list-item {
     &:last-of-type {
-      margin-bottom: 20px;
+      margin-bottom: responsive-height(20);
     }
   }
 }

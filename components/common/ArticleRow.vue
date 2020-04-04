@@ -59,28 +59,28 @@ export default Vue.extend({
 .article-row-wrapper {
   display: flex;
   align-items: center;
-  padding: 0.4rem 1rem;
+  padding: responsive-height(6) responsive-width(16);
   border-bottom: 2px solid $color-gray;
 
   .article-row-left-wrapper {
     position: relative;
 
     .article-row-image {
-      width: 5rem;
-      height: 5rem;
+      width: responsive-width(80);
+      height: responsive-height(80);
       object-fit: cover;
     }
 
     .article-mark {
       position: absolute;
-      top: 3px;
-      left: 3px;
+      top: responsive-height(3);
+      left: responsive-width(3);
       display: inline-block;
-      width: 26px;
-      height: 26px;
-      line-height: 26px;
+      width: responsive-width(26);
+      height: responsive-height(26);
+      line-height: responsive-height(26);
       text-align: center;
-      font-size: 13px;
+      font-size: responsive-width(13);
       color: white;
       border: 1px solid white;
       border-radius: 50%;
@@ -91,9 +91,9 @@ export default Vue.extend({
     }
 
     .new {
-      font-size: 10px;
+      font-size: responsive-width(10);
       font-weight: bold;
-      line-height: 23px;
+      line-height: responsive-height(23);
       background-color: orange;
     }
 
@@ -113,10 +113,10 @@ export default Vue.extend({
   .article-row-right-wrapper {
     display: flex;
     flex-direction: column;
-    margin-left: 1rem;
+    margin-left: responsive-width(16);
 
     .article-row-title {
-      font-size: 0.9rem;
+      font-size: responsive-width(14);
       font-weight: bold;
     }
 
@@ -124,7 +124,7 @@ export default Vue.extend({
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      font-size: 0.4rem;
+      font-size: responsive-width(7);
     }
   }
 }

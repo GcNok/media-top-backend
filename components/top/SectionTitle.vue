@@ -29,17 +29,17 @@ export default Vue.extend({
 
 <style lang="scss">
 .section-title-wrapper {
-  padding: 0 16px 3px;
+  padding: 0 responsive-height(16) responsive-width(3);
   border-bottom: 4px solid orange;
 
   .section-title {
-    font-size: 20px;
+    font-size: responsive-width(20);
   }
 
   .section-comment {
     font-weight: 600;
     color: gray;
-    font-size: 12px;
+    font-size: responsive-width(12);
   }
 }
 </style>

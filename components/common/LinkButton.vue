@@ -25,11 +25,11 @@ export default Vue.extend({
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  width: 250px;
-  height: 50px;
+  width: responsive-width(250);
+  height: responsive-height(50);
   background-color: orange;
   color: white;
-  font-size: 15px;
+  font-size: responsive-width(15);
   border-radius: 10px;
   box-shadow: 0px 3px 6px 1px grey;
   text-decoration: none;

@@ -19,11 +19,11 @@ export default Vue.extend({
   justify-content: space-between;
   align-items: center;
   background-color: $color-black;
-  padding: 7px 12px;
+  padding: responsive-height(7) responsive-width(12);
   width: 100%;
 
   .header-icon {
-    font-size: 34px;
+    font-size: responsive-width(34);
     color: white;
   }
 

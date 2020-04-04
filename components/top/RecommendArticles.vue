@@ -46,16 +46,16 @@ export default Vue.extend({
 
 <style lang="scss">
 .reccoment-article-wrapper {
-  margin: 20px 0;
+  margin: responsive-height(20) 0;
 
   .carousel {
     max-width: 100vw;
-    padding: 16px 16px 0;
+    padding: responsive-height(16) responsive-width(16) 0;
   }
 }
 
 .VueCarousel-wrapper {
-  box-shadow: 0.2rem 0.2rem 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
 }
 </style>
