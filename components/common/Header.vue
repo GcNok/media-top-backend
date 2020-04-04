@@ -1,9 +1,8 @@
 <template>
   <header class="header">
-    <i class="material-icons menu-icon">menu</i>
-    <div class="search-bar">
-      <i class="material-icons search-icon">search</i>
-    </div>
+    <i class="material-icons header-icon">menu</i>
+    <img class="header-logo" src="/img/ss-logo.png" alt="ss-logo" />
+    <i class="material-icons header-icon">search</i>
   </header>
 </template>
 
@@ -17,27 +16,19 @@ export default Vue.extend({
 <style lang="scss">
 .header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: $color-black;
   padding: 7px 12px;
   width: 100%;
 
-  .menu-icon {
+  .header-icon {
     font-size: 34px;
     color: white;
   }
 
-  .search-bar {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    padding-left: 10px;
-    width: 100%;
-    background-color: white;
-    border-radius: 20px;
-
-    .search-icon {
-      font-size: 30px;
-    }
+  .header-logo {
+    width: 180px;
   }
 }
 </style>
