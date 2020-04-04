@@ -1,40 +1,56 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        media-top-frontend
-      </h1>
-      <h2 class="subtitle">
-        メディアトップ画面
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+  <main>
+    <SectionTitle :section="sections[0]" />
+    <TopCarousel />
+    <SectionTitle :section="sections[1]" />
+    <PopularRanking />
+    <SectionTitle :section="sections[2]" />
+    <SectionTitle :section="sections[3]" />
+    <SectionTitle :section="sections[4]" />
+  </main>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Logo from '~/components/Logo.vue'
+import SectionTitle from '~/components/top/SectionTitle.vue'
+import TopCarousel from '~/components/top/TopCarousel.vue'
+import PopularRanking from '~/components/top/PopularRanking.vue'
 
 export default Vue.extend({
   components: {
-    Logo
+    SectionTitle,
+    TopCarousel,
+    PopularRanking
   },
-  mounted() {
-    console.log(this.$accessor.meta.title)
-    // this.$accessor.meta.getMetaInfo()
+  data() {
+    return {
+      sections: [
+        {
+          title: '話題の記事',
+          comment: 'SS編集部が厳選したおすすめの今すぐ読むべき記事まとめ'
+        },
+        {
+          title: '人気記事ランキング',
+          comment: '繰り返し読みたくなる暮らしに役立つ記事をご紹介'
+        },
+        {
+          title: '新着記事',
+          comment: '暮らしのアイデアをSS編集部が毎日更新'
+        },
+        {
+          title: '今月の徹底比較記事ランキング',
+          comment: 'あなたの代わりにSS編集部が商品を購入して比較・検証'
+        },
+        {
+          title: '専門家監修のおすすめ記事一覧',
+          comment: 'その道のプロや専門家の愛用品やおすすめを一挙大公開'
+        },
+        {
+          title: '人気記事ランキング',
+          comment: '繰り返し読みたくなる暮らしに役立つ記事をご紹介'
+        }
+      ]
+    }
   }
 })
 </script>

@@ -40,7 +40,7 @@ const nuxtConfig: Configuration = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/vue-carousel', ssr: false }],
   /*
    ** Nuxt.js dev-modules
    */

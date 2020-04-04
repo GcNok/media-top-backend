@@ -1,7 +1,7 @@
 {
-  "name": "affiliate-sim-frontend",
+  "name": "media-top",
   "version": "1.0.0",
-  "description": "SIMのWebサービス",
+  "description": "メディアトップページ",
   "author": "SmartShopping",
   "private": true,
   "scripts": {
@@ -43,6 +43,7 @@
     "sass-loader": "^8.0.2",
     "stylelint": "^10.1.0",
     "ts-jest": "^25.3.0",
+    "vue-carousel": "^0.18.0",
     "vue-jest": "^4.0.0-0"
   }
 }
