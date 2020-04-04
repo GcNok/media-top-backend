@@ -1,5 +1,9 @@
 <template>
-  <section class="carousel-wrapper">
+  <section class="reccoment-article-wrapper">
+    <SectionTitle
+      :title="'話題の記事'"
+      :comment="'SS編集部が厳選したおすすめの今すぐ読むべき記事まとめ'"
+    />
     <carousel
       class="carousel"
       autoplay
@@ -23,11 +27,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import SectionTitle from '~/components/top/SectionTitle.vue'
 import CarouselSlide from '~/components/top/CarouselSlide.vue'
 import { Article } from '~/types/article'
 export default Vue.extend({
-  name: 'TopCarousel',
+  name: 'RecommendArticles',
   components: {
+    SectionTitle,
     CarouselSlide
   },
   computed: {
@@ -39,8 +45,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.carousel-wrapper {
-  display: flex;
+.reccoment-article-wrapper {
+  margin: 20px 0;
 
   .carousel {
     max-width: 100vw;

@@ -7,10 +7,12 @@
         alt="article"
       />
       <span
-        class="raniking-num"
+        v-if="type === ARTICLE_TYPE_RANK"
+        class="article-mark rank"
         :class="{ gold: rank === 1, silver: rank === 2, bronze: rank === 3 }"
         >{{ rank }}</span
       >
+      <span v-else class="article-mark new">new</span>
     </div>
     <div class="article-row-right-wrapper">
       <p class="article-row-title">
@@ -29,7 +31,7 @@ import { Article } from '~/types/article'
 import { Const } from '~/const/const'
 
 export default Vue.extend({
-  name: 'ArticleList',
+  name: 'ArticleRow',
   props: {
     article: {
       type: Object as () => Article,
@@ -42,6 +44,12 @@ export default Vue.extend({
     rank: {
       type: Number,
       default: 0
+    }
+  },
+  data() {
+    return {
+      ARTICLE_TYPE_RANK: Const.ARTICLE_TYPE_RANK,
+      ARTICLE_TYPE_NEW: Const.ARTICLE_TYPE_NEW
     }
   }
 })
@@ -63,7 +71,7 @@ export default Vue.extend({
       object-fit: cover;
     }
 
-    .raniking-num {
+    .article-mark {
       position: absolute;
       top: 3px;
       left: 3px;
@@ -72,12 +80,21 @@ export default Vue.extend({
       height: 26px;
       line-height: 26px;
       text-align: center;
-      font-size: 14px;
-      font-weight: bold;
+      font-size: 13px;
       color: white;
-      background-color: gray;
       border: 1px solid white;
       border-radius: 50%;
+    }
+
+    .rank {
+      background-color: gray;
+    }
+
+    .new {
+      font-size: 10px;
+      font-weight: bold;
+      line-height: 23px;
+      background-color: orange;
     }
 
     .gold {

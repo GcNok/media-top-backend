@@ -1,6 +1,10 @@
 <template>
-  <section>
-    <ArticleList
+  <section class="popular-articles-wrapper">
+    <SectionTitle
+      :title="'人気記事ランキング'"
+      :comment="'繰り返し読みたくなる暮らしに役立つ記事をご紹介'"
+    />
+    <ArticleRow
       v-for="(article, index) in articles"
       :key="index"
       class="article-list-item"
@@ -14,13 +18,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Article } from '~/types/article'
-import ArticleList from '~/components/common/ArticleList.vue'
+import ArticleRow from '~/components/common/ArticleRow.vue'
 import LinkButton from '~/components/common/LinkButton.vue'
+import SectionTitle from '~/components/top/SectionTitle.vue'
 
 export default Vue.extend({
-  name: 'PopularRanking',
+  name: 'PopularArticlesRanking',
   components: {
-    ArticleList,
+    SectionTitle,
+    ArticleRow,
     LinkButton
   },
   computed: {
@@ -32,9 +38,12 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.article-list-item {
-  &:last-of-type {
-    margin-bottom: 20px;
+.popular-articles-wrapper {
+  margin-bottom: 20px;
+  .article-list-item {
+    &:last-of-type {
+      margin-bottom: 20px;
+    }
   }
 }
 </style>

@@ -1,36 +1,35 @@
 <template>
-  <section class="section-wrapper">
+  <div class="section-title-wrapper">
     <h2 class="section-title">
-      {{ section.title }}
+      {{ title }}
     </h2>
     <h3 class="section-comment">
-      {{ section.comment }}
+      {{ comment }}
     </h3>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-type Section = {
-  title: string
-  comment: string
-}
-
 export default Vue.extend({
   name: 'SectionTitle',
   props: {
-    section: {
-      type: Object as () => Section,
-      default: {}
+    title: {
+      type: String,
+      default: ''
+    },
+    comment: {
+      type: String,
+      default: ''
     }
   }
 })
 </script>
 
 <style lang="scss">
-.section-wrapper {
-  padding: 16px 16px 3px;
+.section-title-wrapper {
+  padding: 0 16px 3px;
   border-bottom: 4px solid orange;
 
   .section-title {
