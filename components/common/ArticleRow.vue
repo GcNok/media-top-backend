@@ -67,18 +67,18 @@ export default Vue.extend({
 
     .article-row-image {
       width: responsive-width(80);
-      height: responsive-height(80);
+      height: responsive-width(80);
       object-fit: cover;
     }
 
     .article-mark {
       position: absolute;
-      top: responsive-height(3);
+      top: responsive-width(3);
       left: responsive-width(3);
       display: inline-block;
       width: responsive-width(26);
-      height: responsive-height(26);
-      line-height: responsive-height(26);
+      height: responsive-width(26);
+      line-height: responsive-width(26);
       text-align: center;
       font-size: responsive-width(13);
       color: white;
@@ -93,7 +93,7 @@ export default Vue.extend({
     .new {
       font-size: responsive-width(10);
       font-weight: bold;
-      line-height: responsive-height(23);
+      line-height: responsive-width(23);
       background-color: orange;
     }
 
