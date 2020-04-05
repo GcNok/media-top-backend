@@ -22,13 +22,33 @@ export default Vue.extend({
   padding: responsive-height(7) responsive-width(12);
   width: 100%;
 
+  @include media-query($pc) {
+    padding: 7px 12px;
+  }
+
   .header-icon {
     font-size: responsive-width(34);
     color: white;
   }
 
   .header-logo {
-    width: 180px;
+    width: responsive-width(180);
+  }
+}
+
+@include media-query($pc) {
+  .header {
+    justify-content: unset;
+    padding: 7px 12px;
+
+    .header-icon {
+      font-size: 34px;
+    }
+
+    .header-logo {
+      margin: 0 auto 0 30px;
+      width: 220px;
+    }
   }
 }
 </style>

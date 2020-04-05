@@ -40,7 +40,7 @@ export default Vue.extend({
 .carousel-image-wrapper {
   display: flex;
   align-items: flex-end;
-  height: responsive-height(190);
+  height: responsive-width(190);
   min-width: responsive-width(272);
   box-shadow: inset 0 -96px 32px rgba(0, 0, 0, 0.6);
   background-size: cover;
@@ -84,6 +84,59 @@ export default Vue.extend({
         flex-direction: column;
         align-items: flex-end;
         font-size: responsive-width(10);
+      }
+    }
+  }
+}
+
+@include media-query($pc) {
+  .carousel-image-wrapper {
+    height: 250px;
+    width: 400px;
+    min-width: unset;
+    box-shadow: inset 0 -96px 32px rgba(0, 0, 0, 0.6);
+    background-size: cover;
+    text-decoration: none;
+    border-radius: 10px;
+
+    .article-image {
+      display: grid;
+      padding: 10px 10px;
+      color: white;
+
+      .article-title {
+        grid-row: 1;
+        margin-bottom: 7px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .article-row {
+        display: flex;
+        justify-content: space-between;
+
+        .writer-wrapper {
+          display: flex;
+          align-items: center;
+
+          .writer-image {
+            margin-right: 3px;
+            width: 32px;
+            border-radius: 50%;
+          }
+
+          .writer-name {
+            font-size: 10px;
+            font-weight: bold;
+          }
+        }
+
+        .article-info-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          font-size: 10px;
+        }
       }
     }
   }

@@ -42,4 +42,18 @@ export default Vue.extend({
     font-size: responsive-width(12);
   }
 }
+@include media-query($pc) {
+  .section-title-wrapper {
+    padding: 0 16px 3px;
+    border-bottom: 4px solid orange;
+
+    .section-title {
+      font-size: 28px;
+    }
+
+    .section-comment {
+      font-size: 16px;
+    }
+  }
+}
 </style>

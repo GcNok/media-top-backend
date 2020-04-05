@@ -1,7 +1,10 @@
 <template>
   <div>
     <Header />
-    <nuxt />
+    <div class="main-wrapper">
+      <aside class="sidebar" />
+      <nuxt class="page-content" />
+    </div>
     <Footer />
   </div>
 </template>
@@ -25,5 +28,20 @@ export default Vue.extend({
 *:after {
   box-sizing: border-box;
   margin: 0;
+}
+
+@include media-query($pc) {
+  .main-wrapper {
+    display: flex;
+
+    .sidebar {
+      min-width: 400px;
+      height: 100vh;
+    }
+
+    .page-content {
+      max-width: 900px;
+    }
+  }
 }
 </style>

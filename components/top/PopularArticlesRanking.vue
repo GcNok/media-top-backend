@@ -4,13 +4,7 @@
       :title="'人気記事ランキング'"
       :comment="'繰り返し読みたくなる暮らしに役立つ記事をご紹介'"
     />
-    <ArticleRow
-      v-for="(article, index) in articles"
-      :key="index"
-      class="article-list-item"
-      :article="article"
-      :rank="index + 1"
-    />
+    <ArticleRow />
     <LinkButton :title="'人気記事ランキング一覧を見る'" :link="'/ranking'" />
   </section>
 </template>
@@ -44,6 +38,31 @@ export default Vue.extend({
   .article-list-item {
     &:last-of-type {
       margin-bottom: responsive-height(20);
+    }
+  }
+}
+
+@include media-query($pc) {
+  .popular-articles-wrapper {
+    margin-bottom: 20px;
+
+    .article-row-wrapper {
+      display: grid;
+      .article-list-item {
+        grid-column: 1/4;
+        &:nth-of-type(1) {
+          grid-column: 1;
+        }
+        &:nth-of-type(2) {
+          grid-column: 2;
+        }
+        &:nth-of-type(3) {
+          grid-column: 3;
+        }
+        &:last-of-type {
+          margin-bottom: 20px;
+        }
+      }
     }
   }
 }
