@@ -2,7 +2,6 @@
   <header class="header">
     <i class="material-icons header-icon">menu</i>
     <img class="header-logo" src="/img/ss-logo.png" alt="ss-logo" />
-    <i class="material-icons header-icon">search</i>
   </header>
 </template>
 
@@ -16,7 +15,6 @@ export default Vue.extend({
 <style lang="scss">
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background-color: $color-black;
   padding: responsive-height(7) responsive-width(12);
@@ -32,13 +30,13 @@ export default Vue.extend({
   }
 
   .header-logo {
+    margin-left: responsive-width(20);
     width: responsive-width(180);
   }
 }
 
 @include media-query($pc) {
   .header {
-    justify-content: unset;
     padding: 7px 12px;
 
     .header-icon {

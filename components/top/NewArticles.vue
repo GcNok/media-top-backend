@@ -4,13 +4,7 @@
       :title="'新着記事'"
       :comment="'暮らしのアイデアをSS編集部が毎日更新'"
     />
-    <ArticleRow
-      v-for="(article, index) in articles"
-      :key="index"
-      class="article-list-item"
-      :article="article"
-      :type="ARTICLE_TYPE_NEW"
-    />
+    <ArticleRow :type="ARTICLE_TYPE_NEW" />
     <LinkButton :title="'新着記事一覧を見る'" :link="'/new'" />
   </section>
 </template>
@@ -46,10 +40,5 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .new-articles-wrapper {
   margin-bottom: responsive-height(20);
-  .article-list-item {
-    &:last-of-type {
-      margin-bottom: responsive-height(20);
-    }
-  }
 }
 </style>

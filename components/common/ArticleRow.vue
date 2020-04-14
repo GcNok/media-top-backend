@@ -11,18 +11,20 @@
           :src="article.articleImage"
           alt="article"
         />
-        <div class="article-mark" v-if="type === ARTICLE_TYPE_RANK" :class="{
-          gold: index === 0,
-          silver: index === 1,
-          bronze: index === 2
-        }" />
+        <div
+          v-if="type === ARTICLE_TYPE_RANK"
+          class="article-mark"
+          :class="{
+            gold: index === 0,
+            silver: index === 1,
+            bronze: index === 2
+          }"
+        />
         <div v-else class="article-mark new-mark" />
-        <span
-            v-if="type === ARTICLE_TYPE_RANK"
-            class="article-mark-text"
-            >{{ index + 1 }}位</span
-          >
-          <span v-else class="article-mark-text new-text">new</span>
+        <span v-if="type === ARTICLE_TYPE_RANK" class="article-mark-text"
+          >{{ index + 1 }}位</span
+        >
+        <span v-else class="article-mark-text new-text">new</span>
       </div>
       <div class="article-row-right-wrapper">
         <p class="article-row-title">
@@ -70,6 +72,10 @@ export default Vue.extend({
   padding: responsive-height(6) responsive-width(16);
   border-bottom: 2px solid $color-gray;
 
+  &:last-of-type {
+    margin-bottom: responsive-height(20);
+  }
+
   .article-row-left-wrapper {
     position: relative;
 
@@ -93,10 +99,10 @@ export default Vue.extend({
       left: responsive-width(3);
       display: block;
       font-size: responsive-width(13);
-      font-weight:bold;
+      font-weight: bold;
       color: white;
       transform: rotate(-45deg);
-      z-index:100;
+      z-index: 100;
     }
 
     .new-mark {
@@ -199,7 +205,7 @@ export default Vue.extend({
           font-size: 18px;
           color: white;
           transform: rotate(-45deg);
-          z-index:100;
+          z-index: 100;
         }
       }
 

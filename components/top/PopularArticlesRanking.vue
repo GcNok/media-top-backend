@@ -34,36 +34,11 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .popular-articles-wrapper {
   margin-bottom: responsive-height(20);
-
-  .article-list-item {
-    &:last-of-type {
-      margin-bottom: responsive-height(20);
-    }
-  }
 }
 
 @include media-query($pc) {
   .popular-articles-wrapper {
     margin-bottom: 20px;
-
-    .article-row-wrapper {
-      display: grid;
-      .article-list-item {
-        grid-column: 1/4;
-        &:nth-of-type(1) {
-          grid-column: 1;
-        }
-        &:nth-of-type(2) {
-          grid-column: 2;
-        }
-        &:nth-of-type(3) {
-          grid-column: 3;
-        }
-        &:last-of-type {
-          margin-bottom: 20px;
-        }
-      }
-    }
   }
 }
 </style>
