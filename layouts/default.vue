@@ -28,6 +28,7 @@ export default Vue.extend({
 *:after {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
 @include media-query($pc) {

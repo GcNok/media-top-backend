@@ -1,6 +1,6 @@
 <template>
-  <div class="article-list-wrapper">
-    <div
+  <ul class="article-list-wrapper">
+    <li
       v-for="(article, index) in articles"
       :key="index"
       class="article-row-wrapper"
@@ -34,8 +34,8 @@
           <span>{{ article.viewNum }} views</span>
         </div>
       </div>
-    </div>
-  </div>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts">
