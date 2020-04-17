@@ -12,7 +12,7 @@
           alt="article"
         />
         <div
-          v-if="type === ARTICLE_TYPE_RANK"
+          v-if="type === ARTICLE_TYPE_POPULAR"
           class="article-mark"
           :class="{
             gold: index === 0,
@@ -21,7 +21,7 @@
           }"
         />
         <div v-else class="article-mark new-mark" />
-        <span v-if="type === ARTICLE_TYPE_RANK" class="article-mark-text"
+        <span v-if="type === ARTICLE_TYPE_POPULAR" class="article-mark-text"
           >{{ index + 1 }}位</span
         >
         <span v-else class="article-mark-text new-text">new</span>
@@ -44,16 +44,16 @@ import { Article } from '~/types/article'
 import { Const } from '~/const/const'
 
 export default Vue.extend({
-  name: 'ArticleRow',
+  name: 'ArticleList',
   props: {
     type: {
       type: String,
-      default: Const.ARTICLE_TYPE_RANK
+      default: Const.ARTICLE_TYPE_POPULAR
     }
   },
   data() {
     return {
-      ARTICLE_TYPE_RANK: Const.ARTICLE_TYPE_RANK,
+      ARTICLE_TYPE_POPULAR: Const.ARTICLE_TYPE_POPULAR,
       ARTICLE_TYPE_NEW: Const.ARTICLE_TYPE_NEW
     }
   },

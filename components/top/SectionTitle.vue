@@ -27,7 +27,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .section-title-wrapper {
   padding: 0 responsive-height(16) responsive-width(3);
   border-bottom: 4px solid orange;

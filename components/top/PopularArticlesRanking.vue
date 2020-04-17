@@ -4,15 +4,15 @@
       :title="'人気記事ランキング'"
       :comment="'繰り返し読みたくなる暮らしに役立つ記事をご紹介'"
     />
-    <ArticleRow />
-    <LinkButton :title="'人気記事ランキング一覧を見る'" :link="'/ranking'" />
+    <ArticleList />
+    <LinkButton :title="'人気記事ランキング一覧を見る'" :link="'/popular'" />
   </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Article } from '~/types/article'
-import ArticleRow from '~/components/common/ArticleRow.vue'
+import ArticleList from '~/components/common/ArticleList.vue'
 import LinkButton from '~/components/common/LinkButton.vue'
 import SectionTitle from '~/components/top/SectionTitle.vue'
 
@@ -20,7 +20,7 @@ export default Vue.extend({
   name: 'PopularArticlesRanking',
   components: {
     SectionTitle,
-    ArticleRow,
+    ArticleList,
     LinkButton
   },
   computed: {

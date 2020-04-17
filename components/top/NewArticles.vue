@@ -4,7 +4,7 @@
       :title="'新着記事'"
       :comment="'暮らしのアイデアをSS編集部が毎日更新'"
     />
-    <ArticleRow :type="ARTICLE_TYPE_NEW" />
+    <ArticleList :type="ARTICLE_TYPE_NEW" />
     <LinkButton :title="'新着記事一覧を見る'" :link="'/new'" />
   </section>
 </template>
@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Article } from '~/types/article'
-import ArticleRow from '~/components/common/ArticleRow.vue'
+import ArticleList from '~/components/common/ArticleList.vue'
 import LinkButton from '~/components/common/LinkButton.vue'
 import SectionTitle from '~/components/top/SectionTitle.vue'
 import { Const } from '~/const/const'
@@ -21,7 +21,7 @@ export default Vue.extend({
   name: 'NewArticles',
   components: {
     SectionTitle,
-    ArticleRow,
+    ArticleList,
     LinkButton
   },
   data() {
