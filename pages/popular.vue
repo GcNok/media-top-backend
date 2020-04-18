@@ -1,12 +1,12 @@
 <template>
-  <section>
+  <div>
     <ListPageTitle
       title="人気記事ランキング"
       sub-title="繰り返し読みたくなる暮らしに役立つ記事をご紹介"
     />
     <ArticleTab :type="articleType" />
     <ArticleList />
-  </section>
+  </div>
 </template>
 
 <script lang="ts">

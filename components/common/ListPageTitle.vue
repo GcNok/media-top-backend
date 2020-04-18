@@ -26,7 +26,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .list-page-title-wrapper {
-  margin: 20px;
+  margin: responsive-height(20) responsive-width(20);
   .list-page-title {
     font-size: responsive-width(20);
   }
@@ -35,6 +35,20 @@ export default Vue.extend({
     font-weight: 600;
     color: gray;
     font-size: responsive-width(12);
+  }
+}
+
+@include media-query($pc) {
+  .list-page-title-wrapper {
+    padding: 0 16px 3px;
+
+    .list-page-title {
+      font-size: 28px;
+    }
+
+    .list-page-sub-title {
+      font-size: 16px;
+    }
   }
 }
 </style>

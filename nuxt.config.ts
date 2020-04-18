@@ -68,6 +68,9 @@ const nuxtConfig: Configuration = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  router: {
+    middleware: ['init-sidebar']
+  },
   build: {
     transpile: [/typed-vuex/]
   }

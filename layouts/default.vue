@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="wrapper" :class="{ open: isDisplaySidebar }">
     <Header />
     <div class="main-wrapper">
-      <aside class="sidebar" />
-      <nuxt class="page-content" />
+      <Sidebar />
+      <main class="page-content" @click="closeSidebar()">
+        <nuxt />
+      </main>
     </div>
     <Footer />
   </div>
@@ -12,12 +14,24 @@
 <script lang="ts">
 import Vue from 'vue'
 import Header from '@/components/common/Header.vue'
+import Sidebar from '@/components/common/Sidebar.vue'
 import Footer from '@/components/common/Footer.vue'
 export default Vue.extend({
   name: 'Default',
   components: {
     Header,
+    Sidebar,
     Footer
+  },
+  computed: {
+    isDisplaySidebar(): boolean {
+      return this.$accessor.isDisplaySidebar
+    }
+  },
+  methods: {
+    closeSidebar(): void {
+      this.$accessor.closeSidebar()
+    }
   }
 })
 </script>
@@ -30,12 +44,23 @@ export default Vue.extend({
   margin: 0;
   padding: 0;
 }
+@include media-query($sp) {
+  .wrapper {
+    transform: translateX(0);
+    transition: transform 100ms ease-in;
+  }
+  .open {
+    transform: translateX(responsive-width(200));
+  }
+}
+
+.main-wrapper {
+  display: flex;
+}
 
 @include media-query($pc) {
   .main-wrapper {
-    display: flex;
-
-    .sidebar {
+    .sidebar-wrapper {
       min-width: 400px;
       height: 100vh;
     }

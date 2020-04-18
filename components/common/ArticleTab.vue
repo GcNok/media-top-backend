@@ -40,12 +40,16 @@ export default Vue.extend({
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 50px;
+    height: responsive-height(50);
     background: whitesmoke;
     list-style: none;
     border: 1px solid $color-gray;
     text-decoration: none;
     color: unset;
+    @include media-query($pc) {
+      margin-bottom: 10px;
+      height: 50px;
+    }
 
     .article-type-text {
       white-space: nowrap;

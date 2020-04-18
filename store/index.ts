@@ -1,9 +1,11 @@
-import { getAccessorType } from 'typed-vuex'
+import { getAccessorType, mutationTree } from 'typed-vuex'
+
 import * as meta from '~/store/meta'
 import { Article } from '~/types/article'
 
 // これらは型推論に必要のため、空でも定義しておく
 export const state = () => ({
+  isDisplaySidebar: false as boolean,
   articles: [
     {
       title: `ふりかえ鉄板おすすめ人気ランキング10選
@@ -108,7 +110,14 @@ export const state = () => ({
   ] as Article[]
 })
 export const getters = {}
-export const mutations = {}
+export const mutations = mutationTree(state, {
+  toggleSidebar(state): void {
+    state.isDisplaySidebar = !state.isDisplaySidebar
+  },
+  closeSidebar(state): void {
+    state.isDisplaySidebar = false
+  }
+})
 export const actions = {}
 
 export const accessorType = getAccessorType({

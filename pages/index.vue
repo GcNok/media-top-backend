@@ -1,9 +1,9 @@
 <template>
-  <main>
+  <div>
     <RecommendArticles />
     <PopularArticlesRanking />
     <NewArticles />
-  </main>
+  </div>
 </template>
 
 <script lang="ts">

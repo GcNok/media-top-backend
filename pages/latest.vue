@@ -1,12 +1,12 @@
 <template>
-  <section>
+  <div>
     <ListPageTitle
       title="新着記事"
       sub-title="暮らしのアイデアをSS編集部が毎日更新"
     />
     <ArticleTab :type="articleType" />
     <ArticleList :type="articleType" />
-  </section>
+  </div>
 </template>
 
 <script lang="ts">
