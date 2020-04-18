@@ -50,8 +50,10 @@ export default Vue.extend({
 @include media-query($pc) {
   .header {
     padding: 7px 12px;
+    height: 50px;
 
     .header-icon {
+      display: none;
       font-size: 34px;
     }
     .header-link {

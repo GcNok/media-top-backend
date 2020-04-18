@@ -60,6 +60,7 @@ export default Vue.extend({
 
 @include media-query($pc) {
   .main-wrapper {
+    justify-content: center;
     .sidebar-wrapper {
       min-width: 400px;
       height: 100vh;

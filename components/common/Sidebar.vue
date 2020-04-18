@@ -35,8 +35,8 @@ export default Vue.extend({
   .sidebar-wrapper {
     position: fixed;
     top: 0;
-    left: responsive-width(-400);
-    width: responsive-width(200);
+    left: responsive-width(-$sidebar-width-sp * 2);
+    width: responsive-width($sidebar-width-sp);
     height: 100%;
     background-color: white;
     border-right: 1px solid $color-gray;
@@ -68,8 +68,35 @@ export default Vue.extend({
 
 @include media-query($pc) {
   .sidebar-wrapper {
+    position: sticky;
+    top: $header-height;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px 0 0;
     min-width: 400px;
     height: 100vh;
+
+    .sidebar-content-title {
+      display: flex;
+      align-items: center;
+      color: black;
+      text-decoration: none;
+      border-bottom: 1px solid $color-gray;
+      padding-left: 10px;
+      height: 30px;
+      background-color: $color-light-orange;
+      font-weight: bold;
+      color: white;
+    }
+    .sidebar-content-link {
+      display: flex;
+      align-items: center;
+      color: black;
+      text-decoration: none;
+      border-bottom: 1px solid $color-gray;
+      padding-left: 20px;
+      height: 40px;
+    }
   }
 }
 </style>
