@@ -1,7 +1,7 @@
 package database
 
 import (
-	dbEntity "github.com/shiji-naoki/media-top-appli-back/domain/entity/database"
+	dbEntity "github.com/shiji-naoki/media-top-backend/domain/entity/database"
 )
 
 type SpecialRepository interface {

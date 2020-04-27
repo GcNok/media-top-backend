@@ -2,9 +2,9 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/shiji-naoki/media-top-appli-back/interfaces/handler"
-	"github.com/shiji-naoki/media-top-appli-back/interfaces/handler/auth"
-	"github.com/shiji-naoki/media-top-appli-back/registry"
+	"github.com/shiji-naoki/media-top-backend/interfaces/handler"
+	"github.com/shiji-naoki/media-top-backend/interfaces/handler/auth"
+	"github.com/shiji-naoki/media-top-backend/registry"
 )
 
 // V1 APIのルーティングを行う

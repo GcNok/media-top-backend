@@ -2,8 +2,8 @@ package registry
 
 import (
 	"github.com/jinzhu/gorm"
-	dbRepo "github.com/shiji-naoki/media-top-appli-back/domain/repository/database"
-	"github.com/shiji-naoki/media-top-appli-back/infrastructure/database"
+	dbRepo "github.com/shiji-naoki/media-top-backend/domain/repository/database"
+	"github.com/shiji-naoki/media-top-backend/infrastructure/database"
 )
 
 type (

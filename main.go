@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/shiji-naoki/media-top-appli-back/interfaces/server"
+	"github.com/shiji-naoki/media-top-backend/interfaces/server"
 )
 
 func main() {

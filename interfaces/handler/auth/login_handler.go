@@ -3,8 +3,8 @@ package auth
 import (
 	"net/http"
 
-	"github.com/shiji-naoki/media-top-appli-back/application/usecase/auth"
-	"github.com/shiji-naoki/media-top-appli-back/registry"
+	"github.com/shiji-naoki/media-top-backend/application/usecase/auth"
+	"github.com/shiji-naoki/media-top-backend/registry"
 
 	"github.com/gin-gonic/gin"
 )
