@@ -5,5 +5,5 @@ import (
 )
 
 type SpecialRepository interface {
-	GetArticle() []dbEntity.Special
+	GetPopularArticles() ([]dbEntity.Special, error)
 }

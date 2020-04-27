@@ -4,32 +4,40 @@ import (
 	"net/http"
 
 	"github.com/shiji-naoki/media-top-backend/application/usecase"
+	"github.com/shiji-naoki/media-top-backend/domain/entity/api/response/common"
 	"github.com/shiji-naoki/media-top-backend/registry"
 
 	"github.com/gin-gonic/gin"
+	log "github.com/shiji-naoki/media-top-backend/infrastructure/logger"
 )
 
 type (
-	// SpecialHandler このクラスに定義するメソッドを定義する
-	SpecialHandler interface {
+	// ArticleHandler このクラスに定義するメソッドを定義する
+	ArticleHandler interface {
 		GetArticles(c *gin.Context)
 	}
 
-	specialHandler struct {
+	articleHandler struct {
 		repo registry.Repository
 	}
 )
 
-// NewSpecialHandler このクラスのインスタンスを返す
-func NewSpecialHandler(repo registry.Repository) SpecialHandler {
-	return &specialHandler{repo}
+// NewArticleHandler このクラスのインスタンスを返す
+func NewArticleHandler(repo registry.Repository) ArticleHandler {
+	return &articleHandler{repo}
 }
 
-// Special リクエストパラメータに付与されたidの値を元にusecaseを呼び出し、返された値をフロントに返す
-
-func (l *specialHandler) GetArticles(c *gin.Context) {
+// Article リクエストパラメータに付与されたidの値を元にusecaseを呼び出し、返された値をフロントに返す
+func (l *articleHandler) GetArticles(c *gin.Context) {
 	ctx := c.Request.Context()
-	articles := usecase.NewSpecialUseCase(l.repo.SpecialRepository()).Do(ctx)
+	articles, err := usecase.NewGetPopularArticlesUseCase(l.repo.SpecialRepository()).Do(ctx)
+	if err != nil {
+		log.Crit(ctx, err.Error())
+		c.JSON(http.StatusInternalServerError, common.HttpResponse{
+			ResultCode: http.StatusInternalServerError,
+			Message:    "人気記事の取得に失敗しました。",
+		})
+	}
 	c.JSON(http.StatusOK, articles)
 	return
 }

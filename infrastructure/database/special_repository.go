@@ -1,7 +1,6 @@
 package database
 
 import (
-	"github.com/davecgh/go-spew/spew"
 	"github.com/jinzhu/gorm"
 	dbEntity "github.com/shiji-naoki/media-top-backend/domain/entity/database"
 	dbRepo "github.com/shiji-naoki/media-top-backend/domain/repository/database"
@@ -11,14 +10,17 @@ type specialRepository struct {
 	db *gorm.DB
 }
 
+// NewSpecialRepository コンストラクタ
 func NewSpecialRepository(db *gorm.DB) dbRepo.SpecialRepository {
 	return &specialRepository{db: db}
 }
 
-func (r *specialRepository) GetArticle() []dbEntity.Special {
+func (r *specialRepository) GetPopularArticles() ([]dbEntity.Special, error) {
 	var specials []dbEntity.Special
 	//result := r.db.First(&specials, id)
-	result := r.db.Limit(3).Find(&specials)
-	spew.Dump(result)
-	return specials
+	err := r.db.Order("self_pv desc").Limit(10).Find(&specials).Error
+	if err != nil {
+		return []dbEntity.Special{}, err
+	}
+	return specials, nil
 }

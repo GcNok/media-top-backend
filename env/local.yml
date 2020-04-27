@@ -11,4 +11,21 @@ server:
   endpoint: "http://localhost"
   host: localhost
   port: 5000
- 
+cache:
+  host:
+  port: 6379
+logger:
+  stdout:
+    crit: true
+    warn: true
+    info: true
+    debug: true
+    dump: true
+  file:
+    crit: true
+    warn: true
+    info: true
+    debug: true
+    dump: false
+    path:
+      default: "logs/app.log"
