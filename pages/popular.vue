@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Const } from '~/const/const'
+import { ConstArticle } from '~/const/article'
 import ListPageTitle from '~/components/common/ListPageTitle.vue'
 import ArticleList from '~/components/common/ArticleList.vue'
 import ArticleTab from '~/components/common/ArticleTab.vue'
@@ -25,7 +25,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      articleType: Const.ARTICLE_TYPE_POPULAR
+      articleType: ConstArticle.ARTICLE_TYPE_POPULAR
     }
   }
 })

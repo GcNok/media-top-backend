@@ -13,18 +13,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Const } from '~/const/const'
+import { ConstArticle } from '~/const/article'
 export default Vue.extend({
   name: 'ArticleTab',
   props: {
     type: {
       type: String,
-      default: Const.ARTICLE_TYPE_POPULAR
+      default: ConstArticle.ARTICLE_TYPE_POPULAR
     }
   },
   data() {
     return {
-      ARTICLE_TAB_LIST: Const.ARTICLE_TAB_LIST
+      ARTICLE_TAB_LIST: ConstArticle.ARTICLE_TAB_LIST
     }
   }
 })

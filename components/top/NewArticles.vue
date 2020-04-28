@@ -15,7 +15,7 @@ import { Article } from '~/types/article'
 import ArticleList from '~/components/common/ArticleList.vue'
 import LinkButton from '~/components/common/LinkButton.vue'
 import SectionTitle from '~/components/top/SectionTitle.vue'
-import { Const } from '~/const/const'
+import { ConstArticle } from '~/const/article'
 
 export default Vue.extend({
   name: 'NewArticles',
@@ -26,7 +26,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      ARTICLE_TYPE_NEW: Const.ARTICLE_TYPE_NEW
+      ARTICLE_TYPE_NEW: ConstArticle.ARTICLE_TYPE_NEW
     }
   },
   computed: {

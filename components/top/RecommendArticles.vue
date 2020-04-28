@@ -67,7 +67,6 @@ export default Vue.extend({
 
 @include media-query($sp) {
   .VueCarousel-wrapper {
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
   }
 }

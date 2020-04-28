@@ -2,7 +2,7 @@
   <a
     class="carousel-image-wrapper"
     :href="article.articleURL"
-    :style="{ backgroundImage: 'url(' + article.articleImage + ')' }"
+    :style="{ backgroundImage: 'url(' + article.mainVisual + ')' }"
   >
     <div class="article-image">
       <p class="article-title">
@@ -14,8 +14,8 @@
           <span class="writer-name">{{ article.writerName }}</span>
         </div>
         <div class="article-info-wrapper">
-          <span>最終更新：{{ article.updateTime }}</span>
-          <span>{{ article.viewNum }} views</span>
+          <span>最終更新：{{ article.rewriteModified }}</span>
+          <span>{{ article.last30daysPv }} views</span>
         </div>
       </div>
     </div>

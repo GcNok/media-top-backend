@@ -17,6 +17,10 @@ export default Vue.extend({
     RecommendArticles,
     PopularArticlesRanking,
     NewArticles
+  },
+  async fetch({ app }) {
+    await app.$accessor.getPopularArticles()
+    await app.$accessor.getNewArticles()
   }
 })
 </script>

@@ -8,7 +8,7 @@
       <div class="article-row-left-wrapper">
         <img
           class="article-row-image"
-          :src="article.articleImage"
+          :src="article.mainVisual"
           alt="article"
         />
         <div
@@ -31,7 +31,7 @@
           {{ article.title }}
         </p>
         <div class="article-row-info">
-          <span>{{ article.viewNum }} views</span>
+          <span>{{ article.last30daysPv }} views</span>
         </div>
       </div>
     </li>
@@ -41,25 +41,35 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Article } from '~/types/article'
-import { Const } from '~/const/const'
+import { ConstArticle } from '~/const/article'
 
 export default Vue.extend({
   name: 'ArticleList',
   props: {
     type: {
       type: String,
-      default: Const.ARTICLE_TYPE_POPULAR
+      default: ConstArticle.ARTICLE_TYPE_POPULAR
     }
   },
   data() {
     return {
-      ARTICLE_TYPE_POPULAR: Const.ARTICLE_TYPE_POPULAR,
-      ARTICLE_TYPE_NEW: Const.ARTICLE_TYPE_NEW
+      ARTICLE_TYPE_POPULAR: ConstArticle.ARTICLE_TYPE_POPULAR,
+      ARTICLE_TYPE_NEW: ConstArticle.ARTICLE_TYPE_NEW
     }
   },
   computed: {
     articles(): Article[] {
-      return this.$accessor.articles
+      switch (this.type) {
+        case ConstArticle.ARTICLE_TYPE_POPULAR:
+          return this.$accessor.popularArticles
+        case ConstArticle.ARTICLE_TYPE_NEW:
+          return this.$accessor.newArticles
+        default:
+          return this.$accessor.articles
+      }
+    },
+    popularArticles(): Article[] {
+      return this.$accessor.popularArticles
     }
   }
 })
