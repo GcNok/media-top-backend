@@ -14,28 +14,73 @@ import (
 type (
 	// ArticleHandler このクラスに定義するメソッドを定義する
 	ArticleHandler interface {
-		GetArticles(c *gin.Context)
+		GetPopularArticles(c *gin.Context)
+		GetNewArticles(c *gin.Context)
+		GetRecommendArticles(c *gin.Context)
 	}
 
 	articleHandler struct {
 		repo registry.Repository
+		svc  registry.Service
 	}
 )
 
 // NewArticleHandler このクラスのインスタンスを返す
-func NewArticleHandler(repo registry.Repository) ArticleHandler {
-	return &articleHandler{repo}
+func NewArticleHandler(repo registry.Repository, svc registry.Service) ArticleHandler {
+	return &articleHandler{repo, svc}
 }
 
-// Article リクエストパラメータに付与されたidの値を元にusecaseを呼び出し、返された値をフロントに返す
-func (l *articleHandler) GetArticles(c *gin.Context) {
+// 人気記事一覧取得
+func (r *articleHandler) GetPopularArticles(c *gin.Context) {
 	ctx := c.Request.Context()
-	articles, err := usecase.NewGetPopularArticlesUseCase(l.repo.SpecialRepository()).Do(ctx)
+	articles, err := usecase.
+		NewGetPopularArticlesUseCase(
+			r.repo.SpecialRepository(),
+			r.svc.ArticleService()).
+		Do(ctx)
 	if err != nil {
 		log.Crit(ctx, err.Error())
 		c.JSON(http.StatusInternalServerError, common.HttpResponse{
 			ResultCode: http.StatusInternalServerError,
 			Message:    "人気記事の取得に失敗しました。",
+		})
+	}
+	c.JSON(http.StatusOK, articles)
+	return
+}
+
+// 新着記事一覧取得
+func (r *articleHandler) GetNewArticles(c *gin.Context) {
+	ctx := c.Request.Context()
+	articles, err := usecase.
+		NewGetNewArticlesUseCase(
+			r.repo.SpecialRepository(),
+			r.svc.ArticleService()).
+		Do(ctx)
+	if err != nil {
+		log.Crit(ctx, err.Error())
+		c.JSON(http.StatusInternalServerError, common.HttpResponse{
+			ResultCode: http.StatusInternalServerError,
+			Message:    "新着記事の取得に失敗しました。",
+		})
+	}
+	c.JSON(http.StatusOK, articles)
+	return
+}
+
+// 話題記事一覧取得
+func (r *articleHandler) GetRecommendArticles(c *gin.Context) {
+	ctx := c.Request.Context()
+	articles, err := usecase.
+		NewGetRecommendArticlesUseCase(
+			r.repo.SpecialRepository(),
+			r.svc.ArticleService()).
+		Do(ctx)
+	if err != nil {
+		log.Crit(ctx, err.Error())
+		c.JSON(http.StatusInternalServerError, common.HttpResponse{
+			ResultCode: http.StatusInternalServerError,
+			Message:    "話題記事の取得に失敗しました。",
 		})
 	}
 	c.JSON(http.StatusOK, articles)

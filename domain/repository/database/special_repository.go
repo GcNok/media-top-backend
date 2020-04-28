@@ -6,4 +6,6 @@ import (
 
 type SpecialRepository interface {
 	GetPopularArticles() ([]dbEntity.Special, error)
+	GetNewArticles() ([]dbEntity.Special, error)
+	GetRecommendArticles() ([]dbEntity.Special, error)
 }

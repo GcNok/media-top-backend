@@ -26,7 +26,7 @@ type (
 		RankingContentBottom string
 		SpecialEnabled       int
 		SelfPv               uint64
-		Last30daysPv         uint64
+		Last30daysPv         uint64 `gorm:"column:last_30days_pv"`
 		Status               uint64
 		IsForFeed            int
 		Created              time.Time
