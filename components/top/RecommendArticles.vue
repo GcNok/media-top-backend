@@ -54,8 +54,20 @@ export default Vue.extend({
   }
 }
 
-.VueCarousel-wrapper {
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
+@include media-query($pc) {
+  .reccoment-article-wrapper {
+    margin: 20px 0;
+
+    .carousel {
+      padding: 16px 30px;
+      background-color: whitesmoke;
+    }
+  }
+}
+
+@include media-query($sp) {
+  .VueCarousel-wrapper {
+    border-radius: 10px;
+  }
 }
 </style>

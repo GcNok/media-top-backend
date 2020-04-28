@@ -1,9 +1,9 @@
 <template>
-  <main>
+  <div>
     <RecommendArticles />
     <PopularArticlesRanking />
     <NewArticles />
-  </main>
+  </div>
 </template>
 
 <script lang="ts">
@@ -17,6 +17,10 @@ export default Vue.extend({
     RecommendArticles,
     PopularArticlesRanking,
     NewArticles
+  },
+  async fetch({ app }) {
+    await app.$accessor.getPopularArticles()
+    await app.$accessor.getNewArticles()
   }
 })
 </script>

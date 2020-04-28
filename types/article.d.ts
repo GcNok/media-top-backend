@@ -1,9 +1,9 @@
 export type Article = {
   title: string
   articleURL: string
-  articleImage: string
+  mainVisual: string
   writerImage: string
   writerName: string
-  updateTime: string
-  viewNum: string
+  last30daysPv: string
+  rewriteModified: string
 }

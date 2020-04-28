@@ -1,25 +1,22 @@
 <template>
-  <div class="section-title-wrapper">
-    <h2 class="section-title">
-      {{ title }}
+  <div class="list-page-title-wrapper">
+    <h1 class="list-page-title">{{ title }}</h1>
+    <h2 class="list-page-sub-title">
+      {{ subTitle }}
     </h2>
-    <h3 class="section-comment">
-      {{ comment }}
-    </h3>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-
 export default Vue.extend({
-  name: 'SectionTitle',
+  name: 'ListPageTitle',
   props: {
     title: {
       type: String,
       default: ''
     },
-    comment: {
+    subTitle: {
       type: String,
       default: ''
     }
@@ -28,30 +25,28 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.section-title-wrapper {
-  padding: 0 responsive-height(16) responsive-width(3);
-  border-bottom: 4px solid orange;
-
-  .section-title {
+.list-page-title-wrapper {
+  margin: responsive-height(20) responsive-width(20);
+  .list-page-title {
     font-size: responsive-width(20);
   }
 
-  .section-comment {
+  .list-page-sub-title {
     font-weight: 600;
     color: gray;
     font-size: responsive-width(12);
   }
 }
-@include media-query($pc) {
-  .section-title-wrapper {
-    padding: 0 16px 3px;
-    border-bottom: 4px solid orange;
 
-    .section-title {
+@include media-query($pc) {
+  .list-page-title-wrapper {
+    padding: 0 16px 3px;
+
+    .list-page-title {
       font-size: 28px;
     }
 
-    .section-comment {
+    .list-page-sub-title {
       font-size: 16px;
     }
   }

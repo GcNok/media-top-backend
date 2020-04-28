@@ -33,5 +33,11 @@ export default Vue.extend({
   border-radius: 10px;
   box-shadow: 0px 3px 6px 1px grey;
   text-decoration: none;
+
+  @include media-query($pc) {
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+  }
 }
 </style>
