@@ -68,7 +68,19 @@ const nuxtConfig: Configuration = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.BASE_URL
+    proxy: true,
+    prefix: '/api'
+  },
+  /*
+   ** Build configuration
+   */
+  proxy: {
+    '/api': {
+      target: process.env.BASE_URL,
+      pathRewrite: {
+        '^/api': '/'
+      }
+    }
   },
   router: {
     middleware: ['init-sidebar']

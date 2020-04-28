@@ -16,7 +16,7 @@ export const state = () => ({
       mainVisual: '/img/hurikake2.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     },
     {
@@ -26,7 +26,7 @@ export const state = () => ({
       mainVisual: '/img/cup-noodle.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     },
     {
@@ -36,7 +36,7 @@ export const state = () => ({
       mainVisual: '/img/beer.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     },
     {
@@ -46,7 +46,7 @@ export const state = () => ({
       mainVisual: '/img/hurikake2.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     },
     {
@@ -56,7 +56,7 @@ export const state = () => ({
       mainVisual: '/img/cup-noodle.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     },
     {
@@ -66,7 +66,7 @@ export const state = () => ({
       mainVisual: '/img/beer.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     },
     {
@@ -76,7 +76,7 @@ export const state = () => ({
       mainVisual: '/img/hurikake2.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     },
     {
@@ -86,7 +86,7 @@ export const state = () => ({
       mainVisual: '/img/cup-noodle.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     },
     {
@@ -96,7 +96,7 @@ export const state = () => ({
       mainVisual: '/img/beer.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     },
     {
@@ -106,10 +106,11 @@ export const state = () => ({
       mainVisual: '/img/hurikake2.jpg',
       writerImage: '/img/writer.jpg',
       writerName: '実用書ライター：小田原',
-      rewriteModified: '1時間前',
+      updated: '1時間前',
       last30daysPv: '000,000'
     }
   ] as Article[],
+  recommendArticles: [] as Article[],
   popularArticles: [] as Article[],
   newArticles: [] as Article[]
 })
@@ -121,6 +122,9 @@ export const mutations = mutationTree(state, {
   closeSidebar(state): void {
     state.isDisplaySidebar = false
   },
+  setRecommendArticles(state, articles) {
+    state.recommendArticles = articles
+  },
   setPopularArticles(state, articles) {
     state.popularArticles = articles
   },
@@ -131,6 +135,12 @@ export const mutations = mutationTree(state, {
 export const actions = actionTree(
   { state, mutations },
   {
+    async getRecommendArticles({ commit }) {
+      const { data } = await this.app.$axios.get(
+        `${ConstAPI.GET_RECOMMEND_ARTICLES}`
+      )
+      commit('setRecommendArticles', data)
+    },
     async getPopularArticles({ commit }) {
       const { data } = await this.app.$axios.get(
         `${ConstAPI.GET_POPULAR_ARTICLES}`

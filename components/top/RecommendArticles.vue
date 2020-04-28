@@ -38,7 +38,7 @@ export default Vue.extend({
   },
   computed: {
     articles(): Article[] {
-      return this.$accessor.articles
+      return this.$accessor.recommendArticles
     }
   }
 })

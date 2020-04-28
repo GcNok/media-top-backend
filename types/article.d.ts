@@ -5,5 +5,5 @@ export type Article = {
   writerImage: string
   writerName: string
   last30daysPv: string
-  rewriteModified: string
+  updated: string
 }
