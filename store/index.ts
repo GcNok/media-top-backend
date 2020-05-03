@@ -2,7 +2,7 @@ import { getAccessorType, mutationTree, actionTree } from 'typed-vuex'
 import { ConstAPI } from '~/const/api'
 
 import * as meta from '~/store/meta'
-import { Article } from '~/types/article'
+import { Article, ComparisonArticle } from '~/types/article'
 
 // これらは型推論に必要のため、空でも定義しておく
 export const state = () => ({
@@ -112,7 +112,8 @@ export const state = () => ({
   ] as Article[],
   recommendArticles: [] as Article[],
   popularArticles: [] as Article[],
-  newArticles: [] as Article[]
+  newArticles: [] as Article[],
+  comparisonArticles: [] as ComparisonArticle[]
 })
 export const getters = {}
 export const mutations = mutationTree(state, {
@@ -130,6 +131,9 @@ export const mutations = mutationTree(state, {
   },
   setNewrArticles(state, articles) {
     state.newArticles = articles
+  },
+  setComparisonArticles(state, articles) {
+    state.comparisonArticles = articles
   }
 })
 export const actions = actionTree(
@@ -150,6 +154,12 @@ export const actions = actionTree(
     async getNewArticles({ commit }) {
       const { data } = await this.app.$axios.get(`${ConstAPI.GET_NEW_ARTICLES}`)
       commit('setNewrArticles', data)
+    },
+    async getComparisonArticles({ commit }) {
+      const { data } = await this.app.$axios.get(
+        `${ConstAPI.GET_COMARISON_ARTICLES}`
+      )
+      commit('setComparisonArticles', data)
     }
   }
 )

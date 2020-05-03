@@ -1,8 +1,9 @@
 <template>
-  <ul class="article-list-wrapper">
-    <li
+  <div class="article-list-wrapper">
+    <a
       v-for="(article, index) in articles"
       :key="index"
+      :href="article.articleURL"
       class="article-row-wrapper"
     >
       <div class="article-row-left-wrapper">
@@ -34,8 +35,8 @@
           <span>{{ article.last30daysPv }} views</span>
         </div>
       </div>
-    </li>
-  </ul>
+    </a>
+  </div>
 </template>
 
 <script lang="ts">
@@ -81,6 +82,8 @@ export default Vue.extend({
   align-items: center;
   padding: responsive-height(6) responsive-width(16);
   border-bottom: 2px solid $color-gray;
+  color: unset;
+  text-decoration: none;
 
   &:last-of-type {
     margin-bottom: responsive-height(20);
@@ -142,6 +145,7 @@ export default Vue.extend({
   .article-row-right-wrapper {
     display: flex;
     flex-direction: column;
+    width: 100%;
     margin-left: responsive-width(16);
 
     .article-row-title {
@@ -164,16 +168,20 @@ export default Vue.extend({
     .article-row-wrapper {
       grid-column: 1/4;
       padding: 6px 16px;
+      height: 130px;
       border-bottom: 2px solid $color-gray;
 
       &:nth-of-type(1) {
         grid-column: 1;
+        height: 270px;
       }
       &:nth-of-type(2) {
         grid-column: 2;
+        height: 270px;
       }
       &:nth-of-type(3) {
         grid-column: 3;
+        height: 270px;
       }
       /* 最初の3記事共通スタイル */
       &:nth-of-type(-n + 3) {
@@ -220,14 +228,16 @@ export default Vue.extend({
       }
 
       .article-row-right-wrapper {
+        justify-content: space-evenly;
         margin-left: 16px;
+        height: 100%;
 
         .article-row-title {
-          font-size: 14px;
+          font-size: 16px;
         }
 
         .article-row-info {
-          font-size: 10px;
+          font-size: 12px;
         }
       }
     }

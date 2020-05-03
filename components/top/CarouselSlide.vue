@@ -74,6 +74,7 @@ export default Vue.extend({
         }
 
         .writer-name {
+          max-width: responsive-width(180);
           font-size: responsive-width(10);
           font-weight: bold;
         }
