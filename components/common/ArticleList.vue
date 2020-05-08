@@ -32,7 +32,10 @@
           {{ article.title }}
         </p>
         <div class="article-row-info">
-          <span>{{ article.last30daysPv }} views</span>
+          <span v-if="type === ARTICLE_TYPE_POPULAR"
+            >{{ article.last30daysPv }} views</span
+          >
+          <span v-else>最終更新：{{ article.updated }}</span>
         </div>
       </div>
     </a>
@@ -145,6 +148,7 @@ export default Vue.extend({
   .article-row-right-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     width: 100%;
     margin-left: responsive-width(16);
 
@@ -157,7 +161,7 @@ export default Vue.extend({
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      font-size: responsive-width(10);
+      font-size: responsive-width(12);
     }
   }
 }
