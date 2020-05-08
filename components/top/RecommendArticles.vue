@@ -27,6 +27,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import Carousel from 'vue-carousel/src/Carousel.vue'
+import Slide from 'vue-carousel/src/Slide.vue'
 import SectionTitle from '~/components/top/SectionTitle.vue'
 import CarouselSlide from '~/components/top/CarouselSlide.vue'
 import { Article } from '~/types/article'
@@ -34,7 +36,9 @@ export default Vue.extend({
   name: 'RecommendArticles',
   components: {
     SectionTitle,
-    CarouselSlide
+    CarouselSlide,
+    Carousel,
+    Slide
   },
   computed: {
     articles(): Article[] {
