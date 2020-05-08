@@ -20,5 +20,8 @@ func NewService() Service {
 }
 
 func (r *serviceImpl) ArticleService() service.ArticleService {
-	return service.NewArticleService(r.repo.VirtualWriterRepository())
+	return service.NewArticleService(
+		r.repo.VirtualWriterRepository(),
+		r.repo.SpecialJanRankRepository(),
+		r.repo.JanRepository())
 }

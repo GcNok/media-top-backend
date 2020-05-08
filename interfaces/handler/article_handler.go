@@ -17,6 +17,7 @@ type (
 		GetPopularArticles(c *gin.Context)
 		GetNewArticles(c *gin.Context)
 		GetRecommendArticles(c *gin.Context)
+		GetComparisonArticles(c *gin.Context)
 	}
 
 	articleHandler struct {
@@ -73,6 +74,25 @@ func (r *articleHandler) GetRecommendArticles(c *gin.Context) {
 	ctx := c.Request.Context()
 	articles, err := usecase.
 		NewGetRecommendArticlesUseCase(
+			r.repo.SpecialRepository(),
+			r.svc.ArticleService()).
+		Do(ctx)
+	if err != nil {
+		log.Crit(ctx, err.Error())
+		c.JSON(http.StatusInternalServerError, common.HttpResponse{
+			ResultCode: http.StatusInternalServerError,
+			Message:    "話題記事の取得に失敗しました。",
+		})
+	}
+	c.JSON(http.StatusOK, articles)
+	return
+}
+
+// 徹底比較記事一覧取得
+func (r *articleHandler) GetComparisonArticles(c *gin.Context) {
+	ctx := c.Request.Context()
+	articles, err := usecase.
+		NewGetComparisonArticlesUseCase(
 			r.repo.SpecialRepository(),
 			r.svc.ArticleService()).
 		Do(ctx)

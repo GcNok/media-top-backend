@@ -20,4 +20,5 @@ func V1(e *gin.Engine) {
 	v1Group.GET("/get_recommend_articles", articleHandler.GetRecommendArticles)
 	v1Group.GET("/get_popular_articles", articleHandler.GetPopularArticles)
 	v1Group.GET("/get_new_articles", articleHandler.GetNewArticles)
+	v1Group.GET("/get_comparison_articles", articleHandler.GetComparisonArticles)
 }

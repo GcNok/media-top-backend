@@ -39,7 +39,23 @@ func (r *specialRepository) GetRecommendArticles() ([]dbEntity.Special, error) {
 	err := r.db.Where("id IN ?",
 		r.db.Table("special_recommends").
 			Select("special_id").
-			SubQuery()).Find(&specials).Error
+			SubQuery()).
+		Find(&specials).Error
+	if err != nil {
+		return []dbEntity.Special{}, err
+	}
+	return specials, nil
+}
+
+func (r *specialRepository) GetComparisonArticles() ([]dbEntity.Special, error) {
+	var specials []dbEntity.Special
+	err := r.db.Where("id IN ?",
+		r.db.Table("special_jan_ranks").
+			Select("distinct(special_id)").
+			SubQuery()).
+		Order("last_30days_pv desc").
+		Limit(10).
+		Find(&specials).Error
 	if err != nil {
 		return []dbEntity.Special{}, err
 	}

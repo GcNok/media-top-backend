@@ -4,6 +4,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/dustin/go-humanize"
 	"github.com/shiji-naoki/media-top-backend/domain/entity/api/response"
 	dbEntity "github.com/shiji-naoki/media-top-backend/domain/entity/database"
@@ -13,15 +14,24 @@ import (
 type (
 	ArticleService interface {
 		CreateResponse(specials []dbEntity.Special) ([]response.GetArticlesResponse, error)
+		CreateComparisonArticlesResponse(specials []dbEntity.Special) ([]response.GetComparisonArticlesResponse, error)
 	}
 
 	articleService struct {
-		virtualWriterRepository dbRepo.VirtualWriterRepository
+		virtualWriterRepository  dbRepo.VirtualWriterRepository
+		specialJanRankRepository dbRepo.SpecialJanRankRepository
+		janRepository            dbRepo.JanRepository
 	}
 )
 
-func NewArticleService(vwr dbRepo.VirtualWriterRepository) ArticleService {
-	return &articleService{virtualWriterRepository: vwr}
+func NewArticleService(
+	vwr dbRepo.VirtualWriterRepository,
+	sjr dbRepo.SpecialJanRankRepository,
+	jr dbRepo.JanRepository) ArticleService {
+	return &articleService{
+		virtualWriterRepository:  vwr,
+		specialJanRankRepository: sjr,
+		janRepository:            jr}
 }
 
 func (r *articleService) CreateResponse(specials []dbEntity.Special) ([]response.GetArticlesResponse, error) {
@@ -30,7 +40,6 @@ func (r *articleService) CreateResponse(specials []dbEntity.Special) ([]response
 		articles[i].Title = specials[i].Title
 		articles[i].MainVisual = "https://smashop.jp" + specials[i].MainVisual
 		articles[i].Last30daysPv = humanize.Comma(int64(specials[i].Last30daysPv))
-		articles[i].RewriteModified = specials[i].RewriteModified
 		articles[i].ArticleURL = r.getArticleURL(specials[i])
 
 		writerName, writerImage, err := r.getWriterInfo(specials[i])
@@ -42,6 +51,45 @@ func (r *articleService) CreateResponse(specials []dbEntity.Special) ([]response
 		articles[i].Updated = r.getUpdatedDate(specials[i])
 	}
 	return articles, nil
+}
+
+func (r *articleService) CreateComparisonArticlesResponse(specials []dbEntity.Special) ([]response.GetComparisonArticlesResponse, error) {
+	articles := make([]response.GetComparisonArticlesResponse, 10)
+	for i := 0; i < len(specials); i++ {
+		articles[i].Title = specials[i].Title
+		articles[i].MainVisual = "https://smashop.jp" + specials[i].MainVisual
+		articles[i].Last30daysPv = humanize.Comma(int64(specials[i].Last30daysPv))
+		articles[i].ArticleURL = r.getArticleURL(specials[i])
+		articles[i].Updated = r.getUpdatedDate(specials[i])
+
+		writerName, writerImage, err := r.getWriterInfo(specials[i])
+		if err != nil {
+			return nil, err
+		}
+		articles[i].WriterName = writerName
+		articles[i].WriterImage = writerImage
+
+		articles[i].ProductImageUrls, err = r.getProductImageUrls(specials[i].Id)
+	}
+	return articles, nil
+}
+
+func (r *articleService) getProductImageUrls(specialId uint64) ([]string, error) {
+	specialJanRanks, err := r.specialJanRankRepository.GetSpecialJanRanks(specialId)
+	var jan dbEntity.Jan
+	var productImageUrls []string
+	for i := 0; i < len(specialJanRanks); i++ {
+		spew.Dump(specialJanRanks)
+		jan, err = r.janRepository.GetJanEntity(specialJanRanks[i].Jan)
+		spew.Dump(err)
+		if err != nil {
+			return []string{}, err
+		}
+		if jan.Imageurl != "" {
+			productImageUrls = append(productImageUrls, jan.Imageurl)
+		}
+	}
+	return productImageUrls, nil
 }
 
 func (r *articleService) getArticleURL(special dbEntity.Special) string {
