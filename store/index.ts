@@ -129,6 +129,9 @@ export const mutations = mutationTree(state, {
   setPopularArticles(state, articles) {
     state.popularArticles = articles
   },
+  addPopularArticles(state, articles) {
+    state.popularArticles.push(...articles)
+  },
   setNewrArticles(state, articles) {
     state.newArticles = articles
   },
@@ -145,11 +148,16 @@ export const actions = actionTree(
       )
       commit('setRecommendArticles', data)
     },
-    async getPopularArticles({ commit }) {
+    async getPopularArticles({ commit, state }) {
       const { data } = await this.app.$axios.get(
         `${ConstAPI.GET_POPULAR_ARTICLES}`
       )
-      commit('setPopularArticles', data)
+      console.log(state.popularArticles.length)
+      if (state.popularArticles.length === 0) {
+        commit('setPopularArticles', data)
+      } else {
+        commit('addPopularArticles', data)
+      }
     },
     async getNewArticles({ commit }) {
       const { data } = await this.app.$axios.get(`${ConstAPI.GET_NEW_ARTICLES}`)

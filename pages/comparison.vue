@@ -5,7 +5,7 @@
       sub-title="あなたの代わりにSS編集部が商品を購入して比較・検証"
     />
     <ArticleTab :type="articleType" />
-    <ArticleList />
+    <ComparisonArticleList />
   </section>
 </template>
 
@@ -13,14 +13,14 @@
 import Vue from 'vue'
 import { ConstArticle } from '~/const/article'
 import ListPageTitle from '~/components/common/ListPageTitle.vue'
-import ArticleList from '~/components/common/ArticleList.vue'
+import ComparisonArticleList from '~/components/common/ComparisonArticleList.vue'
 import ArticleTab from '~/components/common/ArticleTab.vue'
 
 export default Vue.extend({
   name: 'PopularPage',
   components: {
     ListPageTitle,
-    ArticleList,
+    ComparisonArticleList,
     ArticleTab
   },
   data() {

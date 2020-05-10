@@ -40,7 +40,10 @@ const nuxtConfig: Configuration = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/vue-carousel', ssr: false }],
+  plugins: [
+    { src: '~/plugins/vue-carousel', ssr: false },
+    { src: '~/plugins/vue-infinite-loading', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -78,7 +81,7 @@ const nuxtConfig: Configuration = {
     '/api': {
       target: process.env.BASE_URL,
       pathRewrite: {
-        '^/api': '/'
+        '^/api': ''
       }
     }
   },

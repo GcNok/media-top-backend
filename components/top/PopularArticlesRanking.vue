@@ -11,7 +11,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Article } from '~/types/article'
 import ArticleList from '~/components/common/ArticleList.vue'
 import LinkButton from '~/components/common/LinkButton.vue'
 import SectionTitle from '~/components/top/SectionTitle.vue'
@@ -22,11 +21,6 @@ export default Vue.extend({
     SectionTitle,
     ArticleList,
     LinkButton
-  },
-  computed: {
-    articles(): Article[] {
-      return this.$accessor.articles
-    }
   }
 })
 </script>

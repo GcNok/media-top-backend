@@ -22,9 +22,9 @@ export default Vue.extend({
     ComparisonArticles
   },
   async fetch({ app }) {
-    await app.$accessor.getPopularArticles()
-    await app.$accessor.getNewArticles()
-    await app.$accessor.getRecommendArticles()
+    app.$accessor.getPopularArticles()
+    app.$accessor.getNewArticles()
+    app.$accessor.getRecommendArticles()
     await app.$accessor.getComparisonArticles()
   }
 })
