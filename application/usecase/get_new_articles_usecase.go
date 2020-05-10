@@ -12,7 +12,7 @@ import (
 type (
 	// GetNewArticlesUseCase このクラスで定義するメソッドを定義
 	GetNewArticlesUseCase interface {
-		Do(ctx context.Context) ([]response.GetArticlesResponse, error)
+		Do(ctx context.Context, offset int) ([]response.GetArticlesResponse, error)
 	}
 
 	// このクラスで使用するクラスを定義
@@ -28,8 +28,8 @@ func NewGetNewArticlesUseCase(lr dbRepo.SpecialRepository, as service.ArticleSer
 }
 
 // このクラスのメイン処理
-func (r *getNewArticlesUseCase) Do(ctx context.Context) ([]response.GetArticlesResponse, error) {
-	specials, err := r.specialRepository.GetNewArticles()
+func (r *getNewArticlesUseCase) Do(ctx context.Context, offset int) ([]response.GetArticlesResponse, error) {
+	specials, err := r.specialRepository.GetNewArticles(offset)
 	if err != nil {
 		return []response.GetArticlesResponse{}, err
 	}

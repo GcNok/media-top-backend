@@ -29,9 +29,12 @@ func (r *specialRepository) GetPopularArticles(offset int) ([]dbEntity.Special, 
 	return specials, nil
 }
 
-func (r *specialRepository) GetNewArticles() ([]dbEntity.Special, error) {
+func (r *specialRepository) GetNewArticles(offset int) ([]dbEntity.Special, error) {
 	var specials []dbEntity.Special
-	err := r.db.Order("created desc").Limit(10).Find(&specials).Error
+	err := r.db.Order("created desc").
+		Offset(offset).
+		Limit(10).
+		Find(&specials).Error
 	if err != nil {
 		return []dbEntity.Special{}, err
 	}

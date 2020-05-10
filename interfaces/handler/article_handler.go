@@ -24,6 +24,10 @@ type (
 		repo registry.Repository
 		svc  registry.Service
 	}
+
+	requestParams = struct {
+		Offset int `form:"offset"`
+	}
 )
 
 // NewArticleHandler このクラスのインスタンスを返す
@@ -34,12 +38,8 @@ func NewArticleHandler(repo registry.Repository, svc registry.Service) ArticleHa
 // 人気記事一覧取得
 func (r *articleHandler) GetPopularArticles(c *gin.Context) {
 	ctx := c.Request.Context()
-	var (
-		requestParams = struct {
-			Offset int `form:"offset"`
-		}{}
-	)
-	if err := c.ShouldBindQuery(&requestParams); err != nil {
+	var params requestParams
+	if err := c.ShouldBindQuery(&params); err != nil {
 		log.Critf(ctx, "%s", err.Error())
 		c.JSON(http.StatusInternalServerError, common.HttpResponse{
 			ResultCode: 500,
@@ -51,7 +51,7 @@ func (r *articleHandler) GetPopularArticles(c *gin.Context) {
 		NewGetPopularArticlesUseCase(
 			r.repo.SpecialRepository(),
 			r.svc.ArticleService()).
-		Do(ctx, requestParams.Offset)
+		Do(ctx, params.Offset)
 	if err != nil {
 		log.Crit(ctx, err.Error())
 		c.JSON(http.StatusInternalServerError, common.HttpResponse{
@@ -66,11 +66,20 @@ func (r *articleHandler) GetPopularArticles(c *gin.Context) {
 // 新着記事一覧取得
 func (r *articleHandler) GetNewArticles(c *gin.Context) {
 	ctx := c.Request.Context()
+	var params requestParams
+	if err := c.ShouldBindQuery(&params); err != nil {
+		log.Critf(ctx, "%s", err.Error())
+		c.JSON(http.StatusInternalServerError, common.HttpResponse{
+			ResultCode: 500,
+			Message:    "リクエストに問題があるため更新に失敗しました。",
+		})
+		return
+	}
 	articles, err := usecase.
 		NewGetNewArticlesUseCase(
 			r.repo.SpecialRepository(),
 			r.svc.ArticleService()).
-		Do(ctx)
+		Do(ctx, params.Offset)
 	if err != nil {
 		log.Crit(ctx, err.Error())
 		c.JSON(http.StatusInternalServerError, common.HttpResponse{
