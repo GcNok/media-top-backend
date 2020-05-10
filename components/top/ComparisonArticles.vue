@@ -5,13 +5,15 @@
       :comment="'あなたの代わりにSS編集部が商品を購入して比較・検証'"
     />
     <ComparisonArticleList :limit="10" />
-    <LinkButton :title="'徹底比較記事一覧を見る'" :link="'/comparison'" />
+    <LinkButton
+      :title="'徹底比較記事一覧を見る'"
+      :link="'/contents/comparison'"
+    />
   </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Article } from '~/types/article'
 import ComparisonArticleList from '~/components/common/ComparisonArticleList.vue'
 import LinkButton from '~/components/common/LinkButton.vue'
 import SectionTitle from '~/components/top/SectionTitle.vue'

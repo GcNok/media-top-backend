@@ -5,7 +5,7 @@
       :comment="'暮らしのアイデアをSS編集部が毎日更新'"
     />
     <ArticleList :type="ARTICLE_TYPE_NEW" :limit="10" />
-    <LinkButton :title="'新着記事一覧を見る'" :link="'/latest'" />
+    <LinkButton :title="'新着記事一覧を見る'" :link="'/contents/latest'" />
   </section>
 </template>
 
