@@ -7,16 +7,16 @@
     <ArticleTab :type="articleType" />
     <ArticleList />
     <no-ssr>
-      <infinite-loading
-        spinner="spiral"
-        @infinite="infiniteHandler"
-      ></infinite-loading>
+      <infinite-loading spinner="spiral" @infinite="infiniteHandler">
+        <div slot="no-more">これ以上記事は存在しません。</div>
+      </infinite-loading>
     </no-ssr>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { Article } from '~/types/article'
 import { ConstArticle } from '~/const/article'
 import ListPageTitle from '~/components/common/ListPageTitle.vue'
 import ArticleList from '~/components/common/ArticleList.vue'
@@ -29,10 +29,20 @@ export default Vue.extend({
     ArticleList,
     ArticleTab
   },
+  async fetch({ app }) {
+    if (!this.articles) return
+    await app.$accessor.getPopularArticles()
+  },
   data() {
     return {
-      isLoading: false,
-      articleType: ConstArticle.ARTICLE_TYPE_POPULAR
+      isLoading: false as boolean,
+      articleType: ConstArticle.ARTICLE_TYPE_POPULAR,
+      offset: 0 as number
+    }
+  },
+  computed: {
+    articles(): Article[] {
+      return this.$accessor.newArticles()
     }
   },
   methods: {
@@ -40,7 +50,8 @@ export default Vue.extend({
       if (this.isLoading) return
       this.isLoading = true
       try {
-        await this.$accessor.getPopularArticles()
+        this.offset += 10
+        await this.$accessor.getPopularArticles(this.offset)
         $state.loaded()
       } catch (e) {
         $state.complete()

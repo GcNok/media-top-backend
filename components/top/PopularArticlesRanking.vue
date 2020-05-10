@@ -4,7 +4,7 @@
       :title="'人気記事ランキング'"
       :comment="'繰り返し読みたくなる暮らしに役立つ記事をご紹介'"
     />
-    <ArticleList />
+    <ArticleList :limit="10" />
     <LinkButton :title="'人気記事ランキング一覧を見る'" :link="'/popular'" />
   </section>
 </template>

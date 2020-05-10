@@ -1,4 +1,9 @@
-import { getAccessorType, mutationTree, actionTree } from 'typed-vuex'
+import {
+  getAccessorType,
+  getterTree,
+  mutationTree,
+  actionTree
+} from 'typed-vuex'
 import { ConstAPI } from '~/const/api'
 
 import * as meta from '~/store/meta'
@@ -8,114 +13,19 @@ import { Article, ComparisonArticle } from '~/types/article'
 export const state = () => ({
   isDisplaySidebar: false as boolean,
   isSpScreen: true as boolean,
-  articles: [
-    {
-      title: `ふりかえ鉄板おすすめ人気ランキング10選
-    【ごはん検定特Aライターが厳選！話題の商品紹介も】`,
-      articleURL: 'https://smashop.jp/subcategory/403700/special',
-      mainVisual: '/img/hurikake2.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    },
-    {
-      title: `【徹底比較】カップラーメン鉄板おすすめランキング10選
-    【商品を購入して食べ比べました】`,
-      articleURL: 'https://smashop.jp/subcategory/404000/special',
-      mainVisual: '/img/cup-noodle.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    },
-    {
-      title: `【徹底比較】発泡酒鉄板おすすめランキング11選
-    【糖質あり・なし人気商品を購入して飲み比べ検証】`,
-      articleURL: 'https://smashop.jp/subcategory/603030/special',
-      mainVisual: '/img/beer.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    },
-    {
-      title: `ふりかえ鉄板おすすめ人気ランキング10選
-    【ごはん検定特Aライターが厳選！話題の商品紹介も】`,
-      articleURL: 'https://smashop.jp/subcategory/403700/special',
-      mainVisual: '/img/hurikake2.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    },
-    {
-      title: `【徹底比較】カップラーメン鉄板おすすめランキング10選
-    【商品を購入して食べ比べました】`,
-      articleURL: 'https://smashop.jp/subcategory/404000/special',
-      mainVisual: '/img/cup-noodle.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    },
-    {
-      title: `【徹底比較】発泡酒鉄板おすすめランキング11選
-    【糖質あり・なし人気商品を購入して飲み比べ検証】`,
-      articleURL: 'https://smashop.jp/subcategory/603030/special',
-      mainVisual: '/img/beer.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    },
-    {
-      title: `ふりかえ鉄板おすすめ人気ランキング10選
-    【ごはん検定特Aライターが厳選！話題の商品紹介も】`,
-      articleURL: 'https://smashop.jp/subcategory/403700/special',
-      mainVisual: '/img/hurikake2.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    },
-    {
-      title: `【徹底比較】カップラーメン鉄板おすすめランキング10選
-    【商品を購入して食べ比べました】`,
-      articleURL: 'https://smashop.jp/subcategory/404000/special',
-      mainVisual: '/img/cup-noodle.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    },
-    {
-      title: `【徹底比較】発泡酒鉄板おすすめランキング11選
-    【糖質あり・なし人気商品を購入して飲み比べ検証】`,
-      articleURL: 'https://smashop.jp/subcategory/603030/special',
-      mainVisual: '/img/beer.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    },
-    {
-      title: `ふりかえ鉄板おすすめ人気ランキング10選
-    【ごはん検定特Aライターが厳選！話題の商品紹介も】`,
-      articleURL: 'https://smashop.jp/subcategory/403700/special',
-      mainVisual: '/img/hurikake2.jpg',
-      writerImage: '/img/writer.jpg',
-      writerName: '実用書ライター：小田原',
-      updated: '1時間前',
-      last30daysPv: '000,000'
-    }
-  ] as Article[],
   recommendArticles: [] as Article[],
   popularArticles: [] as Article[],
   newArticles: [] as Article[],
   comparisonArticles: [] as ComparisonArticle[]
 })
-export const getters = {}
+export const getters = getterTree(state, {
+  popularArticles: (state) => (limit: number) => {
+    return limit ? state.popularArticles.slice(0, limit) : state.popularArticles
+  },
+  newArticles: (state) => (limit: number = 0) => {
+    return limit ? state.newArticles.slice(0, limit) : state.newArticles
+  }
+})
 export const mutations = mutationTree(state, {
   toggleSidebar(state): void {
     state.isDisplaySidebar = !state.isDisplaySidebar
@@ -135,6 +45,9 @@ export const mutations = mutationTree(state, {
   setNewrArticles(state, articles) {
     state.newArticles = articles
   },
+  addNewArticles(state, articles) {
+    state.newArticles.push(...articles)
+  },
   setComparisonArticles(state, articles) {
     state.comparisonArticles = articles
   }
@@ -148,20 +61,35 @@ export const actions = actionTree(
       )
       commit('setRecommendArticles', data)
     },
-    async getPopularArticles({ commit, state }) {
+    async getPopularArticles({ commit, state }, offset: number = 0) {
       const { data } = await this.app.$axios.get(
-        `${ConstAPI.GET_POPULAR_ARTICLES}`
+        `${ConstAPI.GET_POPULAR_ARTICLES}`,
+        {
+          params: {
+            offset
+          }
+        }
       )
-      console.log(state.popularArticles.length)
       if (state.popularArticles.length === 0) {
         commit('setPopularArticles', data)
       } else {
         commit('addPopularArticles', data)
       }
     },
-    async getNewArticles({ commit }) {
-      const { data } = await this.app.$axios.get(`${ConstAPI.GET_NEW_ARTICLES}`)
-      commit('setNewrArticles', data)
+    async getNewArticles({ commit, state }, offset: number = 0) {
+      const { data } = await this.app.$axios.get(
+        `${ConstAPI.GET_NEW_ARTICLES}`,
+        {
+          params: {
+            offset
+          }
+        }
+      )
+      if (state.newArticles.length === 0) {
+        commit('setNewrArticles', data)
+      } else {
+        commit('addNewArticles', data)
+      }
     },
     async getComparisonArticles({ commit }) {
       const { data } = await this.app.$axios.get(

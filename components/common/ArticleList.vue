@@ -13,7 +13,7 @@
           alt="article"
         />
         <div
-          v-if="type === ARTICLE_TYPE_POPULAR"
+          v-if="type === ARTICLE_TYPE_POPULAR && index < 99"
           class="article-mark"
           :class="{
             gold: index === 0,
@@ -21,11 +21,20 @@
             bronze: index === 2
           }"
         />
-        <div v-else class="article-mark new-mark" />
-        <span v-if="type === ARTICLE_TYPE_POPULAR" class="article-mark-text"
+        <div
+          v-else-if="type === ARTICLE_TYPE_NEW"
+          class="article-mark new-mark"
+        />
+        <span
+          v-if="type === ARTICLE_TYPE_POPULAR && index < 99"
+          class="article-mark-text"
           >{{ index + 1 }}位</span
         >
-        <span v-else class="article-mark-text new-text">new</span>
+        <span
+          v-else-if="type === ARTICLE_TYPE_NEW"
+          class="article-mark-text new-text"
+          >new</span
+        >
       </div>
       <div class="article-row-right-wrapper">
         <p class="article-row-title">
@@ -53,6 +62,10 @@ export default Vue.extend({
     type: {
       type: String,
       default: ConstArticle.ARTICLE_TYPE_POPULAR
+    },
+    limit: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -65,15 +78,12 @@ export default Vue.extend({
     articles(): Article[] {
       switch (this.type) {
         case ConstArticle.ARTICLE_TYPE_POPULAR:
-          return this.$accessor.popularArticles
+          return this.$accessor.popularArticles(this.limit)
         case ConstArticle.ARTICLE_TYPE_NEW:
-          return this.$accessor.newArticles
+          return this.$accessor.newArticles(this.limit)
         default:
-          return this.$accessor.articles
+          return this.$accessor.popularArticles
       }
-    },
-    popularArticles(): Article[] {
-      return this.$accessor.popularArticles
     }
   }
 })
