@@ -40,13 +40,15 @@ import { ComparisonArticle } from '~/types/article'
 
 export default Vue.extend({
   name: 'ComparisonArticleList',
+  props: {
+    limit: {
+      type: Number,
+      default: 0
+    }
+  },
   computed: {
     articles(): ComparisonArticle[] {
-      return this.$accessor.comparisonArticles.filter((article) => {
-        return article.productImageUrls.filter(
-          (productImageUrl) => productImageUrl !== ''
-        )
-      })
+      return this.$accessor.comparisonArticles(this.limit)
     }
   }
 })
@@ -106,6 +108,8 @@ export default Vue.extend({
       margin-right: responsive-width(5);
       width: responsive-width(40);
       height: responsive-width(40);
+      border: 1px solid $color-gray;
+      object-fit: contain;
     }
   }
 }
@@ -157,7 +161,7 @@ export default Vue.extend({
         grid-column: 2;
         margin-top: 10px;
         .product-image {
-          margin-right: 20px;
+          margin-right: 5px;
           width: 40px;
           height: 40px;
         }

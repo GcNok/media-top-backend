@@ -30,7 +30,7 @@ export default Vue.extend({
     ArticleTab
   },
   async fetch({ app }) {
-    if (!this.articles) return
+    if (this.articles) return
     await app.$accessor.getPopularArticles()
   },
   data() {
@@ -42,7 +42,7 @@ export default Vue.extend({
   },
   computed: {
     articles(): Article[] {
-      return this.$accessor.newArticles()
+      return this.$accessor.popularArticles()
     }
   },
   methods: {

@@ -19,11 +19,27 @@ export const state = () => ({
   comparisonArticles: [] as ComparisonArticle[]
 })
 export const getters = getterTree(state, {
-  popularArticles: (state) => (limit: number) => {
+  popularArticles: (state) => (limit: number = 0) => {
     return limit ? state.popularArticles.slice(0, limit) : state.popularArticles
   },
   newArticles: (state) => (limit: number = 0) => {
     return limit ? state.newArticles.slice(0, limit) : state.newArticles
+  },
+  comparisonArticles: (state) => (limit: number = 0) => {
+    let articles: ComparisonArticle[]
+    if (limit) {
+      articles = state.comparisonArticles.slice(0, limit)
+    } else {
+      articles = state.comparisonArticles
+    }
+    return articles.filter((article) => {
+      if (!article.productImageUrls) {
+        return article
+      }
+      return article.productImageUrls.filter(
+        (productImageUrl) => productImageUrl !== ''
+      )
+    })
   }
 })
 export const mutations = mutationTree(state, {
@@ -50,6 +66,9 @@ export const mutations = mutationTree(state, {
   },
   setComparisonArticles(state, articles) {
     state.comparisonArticles = articles
+  },
+  addComparisonArticles(state, articles) {
+    state.comparisonArticles.push(...articles)
   }
 })
 export const actions = actionTree(
@@ -91,11 +110,20 @@ export const actions = actionTree(
         commit('addNewArticles', data)
       }
     },
-    async getComparisonArticles({ commit }) {
+    async getComparisonArticles({ commit, state }, offset: number = 0) {
       const { data } = await this.app.$axios.get(
-        `${ConstAPI.GET_COMARISON_ARTICLES}`
+        `${ConstAPI.GET_COMARISON_ARTICLES}`,
+        {
+          params: {
+            offset
+          }
+        }
       )
-      commit('setComparisonArticles', data)
+      if (state.comparisonArticles.length === 0) {
+        commit('setComparisonArticles', data)
+      } else {
+        commit('addComparisonArticles', data)
+      }
     }
   }
 )

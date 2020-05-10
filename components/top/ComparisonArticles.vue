@@ -4,7 +4,7 @@
       :title="'今月の徹底比較記事ランキング'"
       :comment="'あなたの代わりにSS編集部が商品を購入して比較・検証'"
     />
-    <ComparisonArticleList />
+    <ComparisonArticleList :limit="10" />
     <LinkButton :title="'徹底比較記事一覧を見る'" :link="'/comparison'" />
   </section>
 </template>
@@ -22,11 +22,6 @@ export default Vue.extend({
     SectionTitle,
     ComparisonArticleList,
     LinkButton
-  },
-  computed: {
-    articles(): Article[] {
-      return this.$accessor.articles
-    }
   }
 })
 </script>

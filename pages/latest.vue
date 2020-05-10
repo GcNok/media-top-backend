@@ -30,7 +30,7 @@ export default Vue.extend({
     ArticleTab
   },
   async fetch({ app }) {
-    if (!this.articles) return
+    if (this.articles) return
     await app.$accessor.getNewArticles()
   },
   data() {

@@ -22,10 +22,12 @@ export default Vue.extend({
     ComparisonArticles
   },
   async fetch({ app }) {
-    app.$accessor.getPopularArticles()
-    app.$accessor.getNewArticles()
-    app.$accessor.getRecommendArticles()
-    await app.$accessor.getComparisonArticles()
+    await Promise.all([
+      app.$accessor.getRecommendArticles(),
+      app.$accessor.getPopularArticles(),
+      app.$accessor.getNewArticles(),
+      app.$accessor.getComparisonArticles()
+    ])
   }
 })
 </script>
