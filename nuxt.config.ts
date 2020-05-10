@@ -89,6 +89,7 @@ const nuxtConfig: Configuration = {
     middleware: ['init-sidebar']
   },
   build: {
+    publicPath: '/contents/_nuxt/', // ビルドファイルの配置先を/_nuxtから変更
     transpile: [/typed-vuex/]
   }
 }

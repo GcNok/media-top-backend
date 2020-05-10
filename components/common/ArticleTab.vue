@@ -58,7 +58,7 @@ export default Vue.extend({
 
   .selected {
     background: white;
-    border-top: 3px solid $color-orange;
+    border-top: 3px solid $color-primary-green;
     border-bottom: none;
   }
 }
