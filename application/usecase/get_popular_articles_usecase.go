@@ -12,7 +12,7 @@ import (
 type (
 	// GetPopularArticlesUseCase このクラスで定義するメソッドを定義
 	GetPopularArticlesUseCase interface {
-		Do(ctx context.Context) ([]response.GetArticlesResponse, error)
+		Do(ctx context.Context, offset int) ([]response.GetArticlesResponse, error)
 	}
 
 	// このクラスで使用するクラスを定義
@@ -28,8 +28,8 @@ func NewGetPopularArticlesUseCase(sr dbRepo.SpecialRepository, as service.Articl
 }
 
 // このクラスのメイン処理
-func (r *getPopularArticlesUseCase) Do(ctx context.Context) ([]response.GetArticlesResponse, error) {
-	specials, err := r.specialRepository.GetPopularArticles()
+func (r *getPopularArticlesUseCase) Do(ctx context.Context, offset int) ([]response.GetArticlesResponse, error) {
+	specials, err := r.specialRepository.GetPopularArticles(offset)
 	if err != nil {
 		return []response.GetArticlesResponse{}, err
 	}

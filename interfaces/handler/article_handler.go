@@ -34,11 +34,24 @@ func NewArticleHandler(repo registry.Repository, svc registry.Service) ArticleHa
 // 人気記事一覧取得
 func (r *articleHandler) GetPopularArticles(c *gin.Context) {
 	ctx := c.Request.Context()
+	var (
+		requestParams = struct {
+			Offset int `form:"offset"`
+		}{}
+	)
+	if err := c.ShouldBindQuery(&requestParams); err != nil {
+		log.Critf(ctx, "%s", err.Error())
+		c.JSON(http.StatusInternalServerError, common.HttpResponse{
+			ResultCode: 500,
+			Message:    "リクエストに問題があるため更新に失敗しました。",
+		})
+		return
+	}
 	articles, err := usecase.
 		NewGetPopularArticlesUseCase(
 			r.repo.SpecialRepository(),
 			r.svc.ArticleService()).
-		Do(ctx)
+		Do(ctx, requestParams.Offset)
 	if err != nil {
 		log.Crit(ctx, err.Error())
 		c.JSON(http.StatusInternalServerError, common.HttpResponse{

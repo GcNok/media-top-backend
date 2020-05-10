@@ -15,10 +15,14 @@ func NewSpecialRepository(db *gorm.DB) dbRepo.SpecialRepository {
 	return &specialRepository{db: db}
 }
 
-func (r *specialRepository) GetPopularArticles() ([]dbEntity.Special, error) {
+func (r *specialRepository) GetPopularArticles(offset int) ([]dbEntity.Special, error) {
 	var specials []dbEntity.Special
 	//result := r.db.First(&specials, id)
-	err := r.db.Order("last_30days_pv desc").Limit(10).Find(&specials).Error
+	err := r.db.
+		Order("last_30days_pv desc").
+		Offset(offset).
+		Limit(10).
+		Find(&specials).Error
 	if err != nil {
 		return []dbEntity.Special{}, err
 	}
