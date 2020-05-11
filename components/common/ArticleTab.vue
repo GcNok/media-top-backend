@@ -5,7 +5,7 @@
       :key="index"
       class="article-type"
       :class="{ selected: tab.type === type }"
-      :to="`/${tab.type}`"
+      :to="`/contents/${tab.type}`"
       ><span class="article-type-text">{{ tab.title }}</span></nuxt-link
     >
   </div>
