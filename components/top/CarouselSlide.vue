@@ -14,7 +14,7 @@
           <span class="writer-name">{{ article.writerName }}</span>
         </div>
         <div class="article-info-wrapper">
-          <span>最終更新：{{ article.rewriteModified }}</span>
+          <span>最終更新：{{ article.updated }}</span>
           <span>{{ article.last30daysPv }} views</span>
         </div>
       </div>
@@ -74,6 +74,7 @@ export default Vue.extend({
         }
 
         .writer-name {
+          max-width: responsive-width(180);
           font-size: responsive-width(10);
           font-weight: bold;
         }

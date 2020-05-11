@@ -2,7 +2,7 @@
   <header class="header">
     <i class="material-icons header-icon" @click="toggleSidebar()">menu</i>
     <nuxt-link class="header-link" to="/"
-      ><img class="header-logo" src="/img/ss-logo.png" alt="ss-logo"
+      ><img class="header-logo" src="/contents/img/ss-logo.png" alt="ss-logo"
     /></nuxt-link>
   </header>
 </template>

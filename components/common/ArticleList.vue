@@ -1,8 +1,9 @@
 <template>
-  <ul class="article-list-wrapper">
-    <li
+  <div class="article-list-wrapper">
+    <a
       v-for="(article, index) in articles"
       :key="index"
+      :href="article.articleURL"
       class="article-row-wrapper"
     >
       <div class="article-row-left-wrapper">
@@ -12,7 +13,7 @@
           alt="article"
         />
         <div
-          v-if="type === ARTICLE_TYPE_POPULAR"
+          v-if="type === ARTICLE_TYPE_POPULAR && index < 99"
           class="article-mark"
           :class="{
             gold: index === 0,
@@ -20,22 +21,34 @@
             bronze: index === 2
           }"
         />
-        <div v-else class="article-mark new-mark" />
-        <span v-if="type === ARTICLE_TYPE_POPULAR" class="article-mark-text"
+        <div
+          v-else-if="type === ARTICLE_TYPE_NEW"
+          class="article-mark new-mark"
+        />
+        <span
+          v-if="type === ARTICLE_TYPE_POPULAR && index < 99"
+          class="article-mark-text"
           >{{ index + 1 }}位</span
         >
-        <span v-else class="article-mark-text new-text">new</span>
+        <span
+          v-else-if="type === ARTICLE_TYPE_NEW"
+          class="article-mark-text new-text"
+          >new</span
+        >
       </div>
       <div class="article-row-right-wrapper">
         <p class="article-row-title">
           {{ article.title }}
         </p>
         <div class="article-row-info">
-          <span>{{ article.last30daysPv }} views</span>
+          <span v-if="type === ARTICLE_TYPE_POPULAR"
+            >{{ article.last30daysPv }} views</span
+          >
+          <span v-else>最終更新：{{ article.updated }}</span>
         </div>
       </div>
-    </li>
-  </ul>
+    </a>
+  </div>
 </template>
 
 <script lang="ts">
@@ -49,6 +62,10 @@ export default Vue.extend({
     type: {
       type: String,
       default: ConstArticle.ARTICLE_TYPE_POPULAR
+    },
+    limit: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -61,15 +78,12 @@ export default Vue.extend({
     articles(): Article[] {
       switch (this.type) {
         case ConstArticle.ARTICLE_TYPE_POPULAR:
-          return this.$accessor.popularArticles
+          return this.$accessor.popularArticles(this.limit)
         case ConstArticle.ARTICLE_TYPE_NEW:
-          return this.$accessor.newArticles
+          return this.$accessor.newArticles(this.limit)
         default:
-          return this.$accessor.articles
+          return this.$accessor.popularArticles
       }
-    },
-    popularArticles(): Article[] {
-      return this.$accessor.popularArticles
     }
   }
 })
@@ -81,6 +95,8 @@ export default Vue.extend({
   align-items: center;
   padding: responsive-height(6) responsive-width(16);
   border-bottom: 2px solid $color-gray;
+  color: unset;
+  text-decoration: none;
 
   &:last-of-type {
     margin-bottom: responsive-height(20);
@@ -142,6 +158,8 @@ export default Vue.extend({
   .article-row-right-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
     margin-left: responsive-width(16);
 
     .article-row-title {
@@ -153,7 +171,7 @@ export default Vue.extend({
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      font-size: responsive-width(10);
+      font-size: responsive-width(12);
     }
   }
 }
@@ -164,16 +182,20 @@ export default Vue.extend({
     .article-row-wrapper {
       grid-column: 1/4;
       padding: 6px 16px;
+      height: 130px;
       border-bottom: 2px solid $color-gray;
 
       &:nth-of-type(1) {
         grid-column: 1;
+        height: 270px;
       }
       &:nth-of-type(2) {
         grid-column: 2;
+        height: 270px;
       }
       &:nth-of-type(3) {
         grid-column: 3;
+        height: 270px;
       }
       /* 最初の3記事共通スタイル */
       &:nth-of-type(-n + 3) {
@@ -220,14 +242,16 @@ export default Vue.extend({
       }
 
       .article-row-right-wrapper {
+        justify-content: space-evenly;
         margin-left: 16px;
+        height: 100%;
 
         .article-row-title {
-          font-size: 14px;
+          font-size: 16px;
         }
 
         .article-row-info {
-          font-size: 10px;
+          font-size: 12px;
         }
       }
     }

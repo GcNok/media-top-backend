@@ -5,5 +5,16 @@ export type Article = {
   writerImage: string
   writerName: string
   last30daysPv: string
-  rewriteModified: string
+  updated: string
+}
+
+export type ComparisonArticle = {
+  title: string
+  articleURL: string
+  mainVisual: string
+  writerImage: string
+  writerName: string
+  last30daysPv: string
+  productImageUrls: string[]
+  updated: string
 }

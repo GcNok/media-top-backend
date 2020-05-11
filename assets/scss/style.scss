@@ -1,7 +1,55 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Noto Sans JP'), url('/contents/font/Noto_Sans_JP/NotoSansJP-Thin.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Noto Sans JP'), url('/contents/font/Noto_Sans_JP/NotoSansJP-Light.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Noto Sans JP'), url('/contents/font/Noto_Sans_JP/NotoSansJP-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Noto Sans JP'), url('/contents/font/Noto_Sans_JP/NotoSansJP-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Noto Sans JP'), url('/contents/font/Noto_Sans_JP/NotoSansJP-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Noto Sans JP'), url('/contents/font/Noto_Sans_JP/NotoSansJP-Black.otf') format('opentype');
+}
 
+body {
+  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+}
+
+
+$color-white: white;
 $color-black: #333333;
 $color-gray: #DDDDDD;
-$color-primary-green:#8dc33e;
+$color-primary-green:#64CD6D;
 $color-orange: orange;
 $color-light-orange: #f09a11e8;
 $color-gold: #d8a301;

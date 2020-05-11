@@ -27,16 +27,16 @@ export default Vue.extend({
   margin: 0 auto;
   width: responsive-width(250);
   height: responsive-height(50);
-  background-color: orange;
-  color: white;
+  background-color: $color-primary-green;
+  color: $color-white;
   font-size: responsive-width(15);
   border-radius: 10px;
   box-shadow: 0px 3px 6px 1px grey;
   text-decoration: none;
 
   @include media-query($pc) {
-    width: 100%;
-    height: 50px;
+    width: 335px;
+    height: 60px;
     font-size: 18px;
   }
 }

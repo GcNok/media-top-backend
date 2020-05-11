@@ -30,7 +30,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .section-title-wrapper {
   padding: 0 responsive-height(16) responsive-width(3);
-  border-bottom: 4px solid orange;
+  border-bottom: 4px solid $color-primary-green;
 
   .section-title {
     font-size: responsive-width(20);
@@ -45,7 +45,7 @@ export default Vue.extend({
 @include media-query($pc) {
   .section-title-wrapper {
     padding: 0 16px 3px;
-    border-bottom: 4px solid orange;
+    border-bottom: 4px solid $color-primary-green;
 
     .section-title {
       font-size: 28px;

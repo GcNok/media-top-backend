@@ -8,14 +8,15 @@ const nuxtConfig: Configuration = {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: '日用品・食品の特集｜おすすめ・比較・ランキング',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content:
+          '日用品・食品のネット通販を使いこなすお役立ちコンテンツ集。おすすめ商品、ランキング、賢い買い方、徹底比較。スマートショッピングは日本唯一の「送料込で価格比較」「残量を予想」する通販コンシェルジュ。'
       }
     ],
     link: [
@@ -40,7 +41,10 @@ const nuxtConfig: Configuration = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/vue-carousel', ssr: false }],
+  plugins: [
+    { src: '~/plugins/vue-carousel', ssr: false },
+    { src: '~/plugins/vue-infinite-loading', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -68,12 +72,25 @@ const nuxtConfig: Configuration = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.BASE_URL
+    proxy: true,
+    prefix: '/api'
+  },
+  /*
+   ** Build configuration
+   */
+  proxy: {
+    '/api': {
+      target: process.env.BASE_URL,
+      pathRewrite: {
+        '^/api': ''
+      }
+    }
   },
   router: {
     middleware: ['init-sidebar']
   },
   build: {
+    publicPath: '/contents/_nuxt/', // ビルドファイルの配置先を/_nuxtから変更
     transpile: [/typed-vuex/]
   }
 }
