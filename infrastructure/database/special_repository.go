@@ -54,13 +54,14 @@ func (r *specialRepository) GetRecommendArticles() ([]dbEntity.Special, error) {
 	return specials, nil
 }
 
-func (r *specialRepository) GetComparisonArticles() ([]dbEntity.Special, error) {
+func (r *specialRepository) GetComparisonArticles(offset int) ([]dbEntity.Special, error) {
 	var specials []dbEntity.Special
 	err := r.db.Where("id IN ?",
 		r.db.Table("special_jan_ranks").
 			Select("distinct(special_id)").
 			SubQuery()).
 		Order("last_30days_pv desc").
+		Offset(offset).
 		Limit(10).
 		Find(&specials).Error
 	if err != nil {

@@ -113,11 +113,20 @@ func (r *articleHandler) GetRecommendArticles(c *gin.Context) {
 // 徹底比較記事一覧取得
 func (r *articleHandler) GetComparisonArticles(c *gin.Context) {
 	ctx := c.Request.Context()
+	var params requestParams
+	if err := c.ShouldBindQuery(&params); err != nil {
+		log.Critf(ctx, "%s", err.Error())
+		c.JSON(http.StatusInternalServerError, common.HttpResponse{
+			ResultCode: 500,
+			Message:    "リクエストに問題があるため更新に失敗しました。",
+		})
+		return
+	}
 	articles, err := usecase.
 		NewGetComparisonArticlesUseCase(
 			r.repo.SpecialRepository(),
 			r.svc.ArticleService()).
-		Do(ctx)
+		Do(ctx, params.Offset)
 	if err != nil {
 		log.Crit(ctx, err.Error())
 		c.JSON(http.StatusInternalServerError, common.HttpResponse{

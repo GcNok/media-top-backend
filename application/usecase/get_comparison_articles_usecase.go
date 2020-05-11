@@ -11,7 +11,7 @@ import (
 type (
 	// GetComparisonArticlesUseCase このクラスで定義するメソッドを定義
 	GetComparisonArticlesUseCase interface {
-		Do(ctx context.Context) ([]response.GetComparisonArticlesResponse, error)
+		Do(ctx context.Context, offset int) ([]response.GetComparisonArticlesResponse, error)
 	}
 
 	// このクラスで使用するクラスを定義
@@ -27,8 +27,8 @@ func NewGetComparisonArticlesUseCase(sr dbRepo.SpecialRepository, as service.Art
 }
 
 // このクラスのメイン処理
-func (r *getComparisonArticlesUseCase) Do(ctx context.Context) ([]response.GetComparisonArticlesResponse, error) {
-	specials, err := r.specialRepository.GetComparisonArticles()
+func (r *getComparisonArticlesUseCase) Do(ctx context.Context, offset int) ([]response.GetComparisonArticlesResponse, error) {
+	specials, err := r.specialRepository.GetComparisonArticles(offset)
 	if err != nil {
 		return []response.GetComparisonArticlesResponse{}, err
 	}

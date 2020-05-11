@@ -8,5 +8,5 @@ type SpecialRepository interface {
 	GetPopularArticles(offset int) ([]dbEntity.Special, error)
 	GetNewArticles(offset int) ([]dbEntity.Special, error)
 	GetRecommendArticles() ([]dbEntity.Special, error)
-	GetComparisonArticles() ([]dbEntity.Special, error)
+	GetComparisonArticles(offset int) ([]dbEntity.Special, error)
 }
