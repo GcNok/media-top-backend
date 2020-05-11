@@ -7,6 +7,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/shiji-naoki/media-top-backend/config"
 )
 
 var (
@@ -27,8 +28,8 @@ func newMysqlConnection() (db *gorm.DB) {
 	if err != nil {
 		panic(err.Error())
 	}
-	// d := config.GetEnvValue().Database
-	// db.LogMode(d.LogMode)
+	d := config.GetEnvValue().Database
+	db.LogMode(d.LogMode)
 	db.DB()
 	db.DB().SetConnMaxLifetime(time.Hour * 24)
 	// db.DB().SetMaxIdleConns(d.MaxIdleConnections)

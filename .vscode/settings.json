@@ -1,0 +1,6 @@
+{
+  "go.gocodeAutoBuild": true,
+  "go.gopath": "~/.go/private/media-top",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000
+}

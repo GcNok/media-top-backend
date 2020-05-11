@@ -5,5 +5,8 @@ import (
 )
 
 type SpecialRepository interface {
-	GetArticle() []dbEntity.Special
+	GetPopularArticles(offset int) ([]dbEntity.Special, error)
+	GetNewArticles(offset int) ([]dbEntity.Special, error)
+	GetRecommendArticles() ([]dbEntity.Special, error)
+	GetComparisonArticles(offset int) ([]dbEntity.Special, error)
 }

@@ -8,8 +8,10 @@ import (
 
 type (
 	Repository interface {
-		LoginRepository() dbRepo.LoginRepository
+		JanRepository() dbRepo.JanRepository
 		SpecialRepository() dbRepo.SpecialRepository
+		SpecialJanRankRepository() dbRepo.SpecialJanRankRepository
+		VirtualWriterRepository() dbRepo.VirtualWriterRepository
 	}
 
 	repositoryImpl struct {
@@ -21,10 +23,18 @@ func NewRepository() Repository {
 	return &repositoryImpl{dbConn: database.MysqlConnection()}
 }
 
-func (r *repositoryImpl) LoginRepository() dbRepo.LoginRepository {
-	return database.NewLoginRepository(r.dbConn)
+func (r *repositoryImpl) JanRepository() dbRepo.JanRepository {
+	return database.NewJanRepository(r.dbConn)
 }
 
 func (r *repositoryImpl) SpecialRepository() dbRepo.SpecialRepository {
 	return database.NewSpecialRepository(r.dbConn)
+}
+
+func (r *repositoryImpl) SpecialJanRankRepository() dbRepo.SpecialJanRankRepository {
+	return database.NewSpecialJanRankRepository(r.dbConn)
+}
+
+func (r *repositoryImpl) VirtualWriterRepository() dbRepo.VirtualWriterRepository {
+	return database.NewVirtualWriterRepository(r.dbConn)
 }
